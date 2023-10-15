@@ -1,0 +1,421 @@
+Para Criar Projeto
+
+>npm init
+
+
+----------------------------------------------------------------------------
+Para pegar parâmetros da URL
+app.get("/:nome/:lang", (req, res)=>{
+    var nome = "Renato Nogueira";
+    var lang = "JavaScript";
+    res.render("index",{
+        nome: req.params.nome,
+        lang: req.params.lang
+        empresa: "Guia do Programador",
+        inscritos: 8000
+    });
+});
+----------------------------------------------------------------------------
+Para criar rotas
+>npm install express --save
+
+const express = require("express"); // importando o módulo express para criação de rotas
+const app = express();
+
+app.get("/", (req, res)=>{
+    res.send("Esta é a pagina2")
+});
+
+UTILIZANDO ARQUIVOS ESTÁTICOS NO EXPRESS
+
+no index.js
+app.use(express.static('public'));
+
+Os arquivos estáticos devem ficar dentro da pasta public, para acessá-los o processo é normal com a excessão de que não se 
+deve colocar a pasta public no caminho e é preciso colocar a barra conforme exemplo abaixo
+
+<link rel="stylesheet" href="/css/style.css">
+
+----------------------------------------------------------------------------
+Para criar páginas HTML template engine ejs
+
+>npm install ejs --save
+
+app.set('view engine', 'ejs') //definindo EJS como view engine
+
+Para recarregar as páginas colocar os arquivos HTML com extensão ejs dentro da pasta "views"
+
+no index.js
+
+app.get("/", (req, res)=>{
+    res.render("index");
+});
+
+
+EXIBINDO VARIAVEIS NO EJS
+
+no index.js
+app.get("/", (req, res)=>{
+    var nome = "Renato Nogueira";
+    var lang = "JavaScript";
+    res.render("index",{
+        nome: nome,
+        lang: lang,
+        empresa: "Guia do Programador",
+        inscritos: 8000
+    });
+});
+
+no index.ejs
+ <%= nome %>
+<%= lang %>
+<%= empresa %>
+<%= inscritos %>
+
+ESTRUTURAS CONDICIONAIS EJS
+
+<% if(msg==true){%><h3>Isso é uma mensagem de erro!!!</h3><%} 
+   else{ %> <h3>Não há erros<h3><%}
+%>
+
+ESTRUTURAS DE REPETIÇÃO EJS
+
+  <% produtos.forEach(function(produto){%>
+    <%=produto.nome%>
+    <%=produto.preco%>
+    <hr>
+    <%})%>
+
+
+
+
+---------------------------------------------------------------------------
+>npm install nodemon --save
+
+para executar
+
+>nodemon index.js
+
+
+-----------------------------------------------------------------------------
+UTILIZAÇÂO DO BOOTSTRAP
+
+Entra no site, clica em donwload,
+baixa  o "compiled css and js"
+copia as linhas do pooper e do jquery
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+<body>
+    <h1>Estilo do bootstrap</h1>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"
+        integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+        crossorigin="anonymous"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+
+
+------------------------------------------------------------------------------
+Partials 
+<%-include ('./partials/header.ejs') %>
+
+------------------------------------------------------------------------------
+
+ENVIANDO FORMULARIOS
+
+<form method="post" action="/salvarpergunta">
+
+app.post("/salvarpergunta",(req, res)=>{
+    res.send("Formulario Recebido");
+
+});
+
+Para pegar os dados do formulário é preciso instalar o body-parser
+
+>npm install body-parser --save
+
+no index.js
+const bodyParser = require("body-parser"); // importar o bodyParser
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+no EJS
+Colocar nomes nos inputs
+<input type="text" placeholder="Título" class="form-control" name="titulo">
+
+app.post("/salvarpergunta",(req, res)=>{
+    var titulo = req.body.titulo;
+    var descricao = req.body.descricao;
+    res.send("Formulario Recebido");
+
+});
+
+----------------------------------------------------------------------------------
+Sequelize (extensão para banco de dados)
+
+>npm install sequelize --save
+>npm install mysql2 --save
+
+cria uma pasta "database" e um arquivo "database.js"
+no database.js
+const Sequelize = require('sequelize');
+const connection = new Sequelize('guiaperguntas', 'root', 'gessinger',{
+    host:'localhost',
+    dialect: 'mysql'
+});
+
+module.exports = connection;
+
+
+cria na pasta "database" o arquivo "Pergunta.js"
+const Sequelize = require('sequelize');
+const connection = require('./database');
+
+const Pergunta = connection.define('pergunta', {
+    titulo: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    descricao: {
+        type: Sequelize.TEXT,
+        allowNull: false
+    }
+});
+
+Pergunta.sync({force: false}).then(()=>{
+    console.log("Tabela Criada!")
+})
+module.exports = Pergunta;
+
+
+
+no index.js
+const connection = require('./database/database');
+const Pergunta = require("./database/Pergunta");
+
+muda a função:
+
+app.post("/salvarpergunta", (req, res) => {
+    var titulo = req.body.titulo;
+    var descricao = req.body.descricao;
+
+    Pergunta.create({
+        titulo: titulo,
+        descricao: descricao
+    }).then(()=>{
+        res.redirect('/');
+    })
+
+    
+
+});
+
+-------------------------------------------------------------------------
+Listando as Perguntas
+
+no index.js
+app.get("/", (req, res) => {
+
+    Pergunta.findAll({ raw: true }).then(perguntas => {
+        res.render('index', {
+            perguntas: perguntas
+        });
+    });
+
+});
+
+no index.ejs 
+ <div class="container">
+                <hr>
+                <h1>Perguntas</h1>
+                <hr>
+                <a href="/perguntar" class="btn btn-primary">Perguntar</a>
+                <hr>
+                <% perguntas.forEach( pergunta=>{%>
+                    <br>
+
+                    <div class="card">
+                        <div class="card-body">
+                            <h3>
+                                <%= pergunta.titulo %>
+                            </h3>
+
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary">
+                                Responder
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+
+                    <%} ) %>
+            </div>
+
+----------------------------------------------------------
+
+Ordenando pelo iD de forma decrescente:
+
+app.get("/", (req, res) => {
+
+    Pergunta.findAll({ raw: true, order:[['id', 'DESC']] }).then(perguntas => {
+        res.render('index', {
+            perguntas: perguntas
+        });
+    });
+
+});
+
+----------------------------------------------------------
+Criando rotas através do id pelo link
+
+cria a página perguntaId.ejs
+
+no index.js
+app.get("/pergunta/:id", (req, res) => {
+
+    var id = req.params.id;
+    Pergunta.findOne({
+        where: { id: id }
+    }).then(perguntas => {
+        console.log(perguntas);
+        if (perguntas != undefined) { // pergunta encontrada
+            res.render("perguntaId");
+        }
+        else { // id não encontrado
+            res.redirect("/");
+
+        }
+    });
+})
+
+----------------------------------------------------------
+Criando perguntas com links dinâmicos
+
+<a href="/pergunta/<%= pergunta.id %>"> <button class="btn btn-primary" >Responder </button></a>
+
+----------------------------------------------------------
+Criando a tabela de respostas
+
+dentro da pasta database cria o arquivo Resposta.js
+
+const Sequelize = require('sequelize');
+const connection = require('./database');
+
+const Resposta = connection.define("respostas", {
+    corpo: {
+        type: Sequelize.TEXT,
+        allowNull: false
+    },
+    perguntaId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    }
+
+}
+
+
+);
+
+Resposta.sync({force: false});
+module.exports = Resposta;
+
+no index.js importa
+const Resposta = require("./database/Resposta");
+
+-----------------------------------------------------------------
+Criando pastas separadas ao estilo MVC 
+
+para cada funcionalidade cria uma pasta "funcionalidade" e dentro da pasta o arquivo funcionalidadeController.js
+
+dentro do arquivo  funcionalidadeController.js 
+
+const express = require('express');
+const router = express.Router();
+
+router.get('/categories', (req, res)=>{
+    res.send("ROTA DE CATEGORIAS")
+});
+
+
+router.get('admin/categories/new', (req, res)=>{
+    res.send("ROTA PARA CRIAR NOVA CATEGORIA")
+});
+
+module.exports = router;
+
+dentro do index.js
+importa
+
+
+const categoriesController = require('./categories/CategoriesController');
+
+
+app.use("/", categoriesController)
+
+---------------------------------------------------------------------------
+Relacionamento no banco de dados com Sequelize
+
+//Article.sync({force: true});
+
+Article.belongsTo(Category); //Um artigo pertence a uma categoria
+Category.hasMany(Article)//Uma Categoria tem muitos artigos
+module.exports = Article;
+
+----------------------------------------------------------------------------
+Instalação do slugfy
+
+npm install --save slugify
+
+Biblioteca que transforma um tituto para o formato de link...
+
+----------------------------------------------------------------------------
+Hash de Senha
+
+npm install --save bcryptjs
+
+no controller 
+const bcrypt = require("bcrypt");
+
+Exemplo de uso 
+
+router.post("/users/create", (req, res) => {
+    var email = req.body.email;
+    var password = req.body.password;
+    var salt = bcript.genSaltSync(10);
+    var hash = bcript.hashSync(password, salt);
+
+    User.create({
+        email: email,
+        password: hash
+    }).then(() => {
+        console.log("Usuario Salvo no banco de dados");
+        res.redirect("/");
+    }).catch((err) => {
+        console.log(err);
+        redirect("/");
+    });
+});
+
+
+
+-------------------------------------------------------------------
+Trabalhar com session 
+
+npm install express-session --save
+
+no index principal
+
+const session = require("express-session");
+
+app.use(seesion({
+    secret: umapalavraqualquerquevocepodeusaraqui
+}))
