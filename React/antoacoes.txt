@@ -1,0 +1,3 @@
+### Criando Aplicativo
+
+npx create-react-app .

@@ -4,7 +4,9 @@
   "description": "Trabalho desenvolvido no segundo semestre de 2023, como Trabalho de Conclusão de Curso, para o curso de Engenharia da Computação da Univesp.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,8 @@
     "mysql2": "^3.6.1",
     "nodemon": "^3.0.1",
     "sequelize": "^6.33.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.51.0"
   }
 }
