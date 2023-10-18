@@ -9,8 +9,25 @@ const getAll = async (request, response) => {
 
 }
 
+const getLogin = async (request, response) => {
+    
+    const users = await taskModel.getLogin();
+    return response.json(users)
+
+}
+
+const login  = (request, response)=>{
+    getLogin();
+    var body = request.body;
+    console.log(body);
+    console.log(users);
+return
+
+}
+
 
 
 module.exports = {
-    getAll
+    getAll,
+    login
 }
