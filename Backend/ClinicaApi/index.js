@@ -4,6 +4,8 @@ const connection = require("./database/database");
 const Login = require("./login/Login");
 const cors = require('cors');
 const bodyParser = require("body-parser");
+const Medicamentos = require("./medicamentos/Medicamentos");
+const Pacientes = require("./pacientes/Pacientes");
 
 const port = process.env.PORT_APP || 3333;
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,9 +30,52 @@ connection.authenticate().then(() => {
     console.log("Ohhh não... alguma coisa deu errado!!! " + error)
 });
 
+//Configurando Banco de dados Inicial
+app.get("/api/ConfiguracaoInicial", (req, res) => {
+    Login.create({
+        login: "admin",
+            senha: "admin"
+    }).then(
+        Pacientes.create({
+
+            nome:"João Da Silva",
+            idade:47,
+            telefone :"(11) 99999-0890",
+            responsavel_1 :"Marcinho",
+            tel_responsavel_1:"(11) 99999-0899",
+            responsavel_2 :"Marcos",
+            tel_responsavel_2:"(11) 99999-0896"
+
+        }
+    ))
+    .then(
+        Medicamentos.create({
+
+
+            medicamento:"Dipirona",
+            dose:"500mg",
+            data_inicial :"2023-09-16 23:59:59"
+                ,
+            data_final :"2023-09-25 23:59:59",
+            intervalo: 8,
+            status:1,
+            pacienteId:1
 
 
 
+
+        })
+    )
+    .then(console.log("Dados Cadastrados com Sucesso!!")).then(res.sendStatus(200)).catch(err => {
+        console.log("Deu erro...")
+        res.sendStatus(400);
+        console.log(err)
+    })
+
+})
+
+
+//Administradores
 
 app.post("/api/CadastrarAdministrador", (req, res) => {
 
@@ -113,11 +158,41 @@ app.post("/api/VerificarLogin", (req, res) => {
 
 
 
+//Medicamentos
+
+app.get("/api/ListarMedicamentos", (req, res) => {
+    Medicamentos.findAll().then(medicacoes => {
+
+        res.json(medicacoes)
+    }).then(console.log("Listando medicacoes")).catch(() => {
+        console.log("Erro 03")
+        res.sendStatus(400)
+    })
+
+})
+
+
+
+//Pacientes
+
+app.get("/api/ListarPacientes", (req, res) => {
+    Pacientes.findAll().then(pacientes => {
+
+        res.json(pacientes)
+    }).then(console.log("Listando pacientes")).catch(() => {
+        console.log("Erro 03")
+        res.sendStatus(400)
+    })
+
+})
+
+
+
 
 app.listen(port, () => {
     console.log(`
 Rodando...
-Este projeto foi desenvolvido em Node.js em abril de 2023
+Este projeto foi desenvolvido em Node.js em Setembro de 2023
 Autor: Renato Nogueira
 `
 
