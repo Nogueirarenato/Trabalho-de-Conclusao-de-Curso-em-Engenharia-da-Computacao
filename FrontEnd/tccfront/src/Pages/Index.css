@@ -1,0 +1,109 @@
+* {
+    font-family: 'Segoe UI';
+}
+
+body{
+    background-color: rgb(255, 255, 255, 0.100);
+    background: url('../img/back.PNG') no-repeat center fixed;
+    position: relative;
+ 
+    max-width: 100vw;
+    
+ 
+    background-size: cover;
+}
+
+.image1{
+    max-width: 9vw;
+   
+    height: auto;
+    
+}
+
+
+.limitH{
+    max-height: 80vh;
+}
+
+#login {
+    width: 100%;
+}
+/*  Oculta a img 2*/
+.image2 {
+    display: none;
+
+}
+
+.textPrimeiroTitulo{
+    text-align: center;
+    display: block;
+    color: red;
+}
+.textPrimeiroAcesso{
+    text-align: center;
+    display: block;
+    color: rgb(98, 0, 255);
+}
+.caixa {   
+    background-color: rgba(255, 255, 255, 0.710);         
+    height: 30%;
+    margin: 5% 32.5%;
+    border-style: hidden;
+    border-radius: 3%;
+   
+    flex-direction: column; 
+    align-items: center;
+    max-height: vh;
+}
+.caixa p {
+    margin: -8% 8% 10%;
+    width: 100%; 
+    color: #08175a;
+}
+
+.caixa img {
+    width: 100%;
+    margin: 12% 12% 3% 12%;
+}
+.caixa input {
+    margin-left: 25%;
+    display: block;
+    justify-content: center;
+    text-align: center;
+    padding: 3.5% 1%;
+    width: 50%;
+    height: 1.7em;
+    font-size: 1.1em;
+    border-radius: 5px;
+    filter: opacity(75%);
+    border:none;
+    border-bottom: 5px solid rgba(24, 0, 243, 0.8);
+    margin-bottom: 3%;
+}
+
+.divButton{
+    display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 3%;
+  padding-bottom: 5%;
+  color:aliceblue;
+  text-decoration: none;
+  
+    
+}
+
+.powered{
+    margin-right: 5%;
+}
+
+.input-text::-webkit-input-placeholder { /* Chrome, Safari, Opera */
+    text-align: center;
+    font-style: italic;
+  }
+
+p {
+    text-align: right;
+    color:white;
+}
+

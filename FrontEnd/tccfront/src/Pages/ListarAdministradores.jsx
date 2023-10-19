@@ -9,8 +9,8 @@ const PaginaDeAdministradores= () => {
        <h1>Página de Administradores</h1>
 
 
-       <Link to="/" class="active">
-       <h2>Ir para Página de Login</h2>
+       <Link to="/PrimeiroAcesso" class="active">
+       <h2>Primeiro Acesso</h2>
         
       </Link>
        
