@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const Medicamentos = require("./medicamentos/Medicamentos");
 const Pacientes = require("./pacientes/Pacientes");
 
-const port = process.env.PORT_APP || 3333;
+const port = process.env.PORT_APP || 21049;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 

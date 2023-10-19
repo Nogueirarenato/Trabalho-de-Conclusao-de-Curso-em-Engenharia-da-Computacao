@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 
-const connection = new Sequelize('CLINICAAPI', 'root', 'banana', {
-    host: 'localhost',
+const connection = new Sequelize('apirenatonogue', 'apirenatonogue', 'Banana33', {
+    host: 'mysql.apirenatonogueira.kinghost.net',
     dialect: 'mysql',
     dialectOptions: {
-        useUTC: false, //for reading from database
+        //useUTC: false, //for reading from database
         dateStrings: true,
         typeCast: true
     },
