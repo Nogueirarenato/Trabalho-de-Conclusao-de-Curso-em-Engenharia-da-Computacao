@@ -7,37 +7,37 @@ const Pacientes = require('../pacientes/Pacientes.js');
 
 
 const Medicamentos = connection.define('medicacao', {
-    
-   
-    medicamento:{
+
+
+    medicamento: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    dose:{
+    dose: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    data_inicial :{
+    data_inicial: {
         type: Sequelize.DATE(6),
         allowNull: false
     },
-    data_final :{
+    data_final: {
         type: Sequelize.DATE(6),
         allowNull: false
     },
-    intervalo:{
+    intervalo: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    status:{
+    status: {
         type: Sequelize.TINYINT.UNSIGNED,
         allowNull: false
     }
-    
+
 })
 
 Medicamentos.belongsTo(Pacientes); //Um medicamento pertence a um paciente
 Pacientes.hasMany(Medicamentos)//Um paciente tem muitos medicamentos
-Medicamentos.sync({force: false});
+Medicamentos.sync({ force: false });
 
 module.exports = Medicamentos;

@@ -34,43 +34,43 @@ connection.authenticate().then(() => {
 app.get("/api/ConfiguracaoInicial", (req, res) => {
     Login.create({
         login: "admin",
-            senha: "admin"
+        senha: "admin"
     }).then(
         Pacientes.create({
 
-            nome:"João Da Silva",
-            idade:47,
-            telefone :"(11) 99999-0890",
-            responsavel_1 :"Marcinho",
-            tel_responsavel_1:"(11) 99999-0899",
-            responsavel_2 :"Marcos",
-            tel_responsavel_2:"(11) 99999-0896"
+            nome: "João Da Silva",
+            idade: 47,
+            telefone: "(11) 99999-0890",
+            responsavel_1: "Marcinho",
+            tel_responsavel_1: "(11) 99999-0899",
+            responsavel_2: "Marcos",
+            tel_responsavel_2: "(11) 99999-0896"
 
         }
-    ))
-    .then(
-        Medicamentos.create({
+        ))
+        .then(
+            Medicamentos.create({
 
 
-            medicamento:"Dipirona",
-            dose:"500mg",
-            data_inicial :"2023-09-16 23:59:59"
+                medicamento: "Dipirona",
+                dose: "500mg",
+                data_inicial: "2023-09-16 23:59:59"
                 ,
-            data_final :"2023-09-25 23:59:59",
-            intervalo: 8,
-            status:1,
-            pacienteId:1
+                data_final: "2023-09-25 23:59:59",
+                intervalo: 8,
+                status: 1,
+                pacienteId: 1
 
 
 
 
+            })
+        )
+        .then(console.log("Dados Cadastrados com Sucesso!!")).then(res.sendStatus(200)).catch(err => {
+            console.log("Deu erro...")
+            res.sendStatus(400);
+            console.log(err)
         })
-    )
-    .then(console.log("Dados Cadastrados com Sucesso!!")).then(res.sendStatus(200)).catch(err => {
-        console.log("Deu erro...")
-        res.sendStatus(400);
-        console.log(err)
-    })
 
 })
 
@@ -84,7 +84,7 @@ app.post("/api/CadastrarAdministrador", (req, res) => {
     var login = req.body.login;
     var senha = req.body.senha;
     console.log(body);
-    
+
 
 
     Login.create(
@@ -96,7 +96,7 @@ app.post("/api/CadastrarAdministrador", (req, res) => {
     ).then(
         () => {
             console.log("ADMINISTRADOR CADASTRADO!!")
-            
+
         }
     ).then(() => {
         res.sendStatus(200);
@@ -131,29 +131,29 @@ app.post("/api/VerificarLogin", (req, res) => {
     var senha = req.body.senha;
     var trigger = 1;
     console.log(body);
-    
+
 
     Login.findAll().then(loginBanco => {
         console.log(loginBanco);
         console.log(`Login Enviado ${login}    Senha Enviada: ${senha}`)
         let logins = Object.keys(loginBanco);
         console.log(logins)
-        
+
 
         for (const dataValues in loginBanco) {
             if (Object.hasOwnProperty.call(loginBanco, dataValues)) {
-           const element = loginBanco[dataValues];
-           console.log(`element.login = ${element.login}    element.senha= ${element.senha}`)
-           if(element.login == login && element.senha == senha){ trigger =2;}
-         
+                const element = loginBanco[dataValues];
+                console.log(`element.login = ${element.login}    element.senha= ${element.senha}`)
+                if (element.login == login && element.senha == senha) { trigger = 2; }
+
             }
         }
 
-        
 
-    }).then(()=>{
-        if(trigger == 2){res.sendStatus(200)}
-        else(res.sendStatus(401))
+
+    }).then(() => {
+        if (trigger == 2) { res.sendStatus(200) }
+        else (res.sendStatus(401))
     })
 
 
@@ -188,6 +188,55 @@ app.get("/api/ListarPacientes", (req, res) => {
     })
 
 })
+
+app.post("/api/CadastrarPaciente", (req, res) => {
+
+
+    var body = req.body;
+    var nome = req.body.nome;
+    var idade = req.body.idade;
+    var idadeInt = parseInt(idade);
+    var telefone = req.body.telefone;
+    var responsavel_1 = req.body.responsavel_1;
+    var tel_responsavel_1 = req.body.tel_responsavel_1;
+    var tel_responsavel_2 = req.body.tel_responsavel_1;
+    var responsavel_2 = req.body.responsavel_2;
+    console.log(body);
+
+
+
+    Pacientes.create(
+        {
+            nome: nome,
+            idade: idadeInt,
+            telefone: telefone,
+            responsavel_1: responsavel_1,
+            tel_responsavel_1: tel_responsavel_1,
+            responsavel_2: responsavel_2,
+            tel_responsavel_2: tel_responsavel_2
+
+
+        }
+    ).then(
+        () => {
+            console.log("PACIENTE CADASTRADO!!")
+
+        }
+    ).then(() => {
+        res.sendStatus(200);
+    }).catch(err => {
+        console.log("Deu erro...")
+        res.sendStatus(400);
+        console.log(err)
+    })
+
+
+
+
+})
+
+
+
 
 
 

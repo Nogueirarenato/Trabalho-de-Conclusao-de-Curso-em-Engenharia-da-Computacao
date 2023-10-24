@@ -2,38 +2,38 @@ const Sequelize = require('sequelize');
 const connection = require('../database/database');
 
 const Pacientes = connection.define('paciente', {
-    
-   
-    nome:{
+
+
+    nome: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    idade:{
+    idade: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
-    telefone :{
+    telefone: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    responsavel_1 :{
+    responsavel_1: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    tel_responsavel_1:{
+    tel_responsavel_1: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    responsavel_2 :{
+    responsavel_2: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    tel_responsavel_2:{
+    tel_responsavel_2: {
         type: Sequelize.STRING,
         allowNull: false
     },
 })
 
-Pacientes.sync({force: false});
+Pacientes.sync({ force: false });
 
 module.exports = Pacientes;

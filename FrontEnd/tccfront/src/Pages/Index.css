@@ -2,62 +2,66 @@
     font-family: 'Segoe UI';
 }
 
-body{
+body {
     background-color: rgb(255, 255, 255, 0.100);
     background: url('../img/back.PNG') no-repeat center fixed;
     position: relative;
- 
+
     max-width: 100vw;
-    
- 
+
+
     background-size: cover;
 }
 
-.image1{
+.image1 {
     max-width: 9vw;
-   
+
     height: auto;
-    
+
 }
 
 
-.limitH{
+.limitH {
     max-height: 80vh;
 }
 
 #login {
     width: 100%;
 }
+
 /*  Oculta a img 2*/
 .image2 {
     display: none;
 
 }
 
-.textPrimeiroTitulo{
+.textPrimeiroTitulo {
     text-align: center;
     display: block;
     color: red;
 }
-.textPrimeiroAcesso{
+
+.textPrimeiroAcesso {
     text-align: center;
     display: block;
     color: rgb(98, 0, 255);
 }
-.caixa {   
-    background-color: rgba(255, 255, 255, 0.710);         
+
+.caixa {
+    background-color: rgba(255, 255, 255, 0.710);
     height: 30%;
     margin: 5% 32.5%;
     border-style: hidden;
     border-radius: 3%;
-   
-    flex-direction: column; 
+
+    flex-direction: column;
     align-items: center;
     max-height: vh;
 }
+
 .caixa p {
     margin: -8% 8% 10%;
-    width: 100%; 
+    width: 100%;
     color: #08175a;
 }
 
@@ -65,6 +69,7 @@ body{
     width: 100%;
     margin: 12% 12% 3% 12%;
 }
+
 .caixa input {
     margin-left: 25%;
     display: block;
@@ -76,35 +81,36 @@ body{
     font-size: 1.1em;
     border-radius: 5px;
     filter: opacity(75%);
-    border:none;
+    border: none;
     border-bottom: 5px solid rgba(24, 0, 243, 0.8);
     margin-bottom: 3%;
 }
 
-.divButton{
+.divButton {
     display: flex;
-  justify-content: center;
-  margin-top: 5%;
-  margin-bottom: 3%;
-  padding-bottom: 5%;
-  color:aliceblue;
-  text-decoration: none;
-  
-    
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    padding-bottom: 5%;
+    color: aliceblue;
+    text-decoration: none;
+
+
 }
 
-.powered{
+.powered {
     margin-right: 5%;
 }
 
-.input-text::-webkit-input-placeholder { /* Chrome, Safari, Opera */
+.input-text::-webkit-input-placeholder {
+    /* Chrome, Safari, Opera */
     text-align: center;
     font-style: italic;
-  }
+}
 
 p {
     text-align: right;
-    color:white;
+    color: white;
 }
 
 .container-hosts {
@@ -113,19 +119,19 @@ p {
     align-items: center;
 }
 
-.fundoHostGroup { 
+.fundoHostGroup {
     width: 65%;
     margin-top: 4%;
-    background-color:rgba(255, 250, 250, 0.85);
-    border-radius: 18px;    
+    background-color: rgba(255, 250, 250, 0.85);
+    border-radius: 18px;
 }
 
 #logo img {
-  padding-top: 5%;
-  display: block;
-  width: 40%;
-  margin-left: auto;
-  margin-right: auto;
+    padding-top: 5%;
+    display: block;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 

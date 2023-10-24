@@ -6,6 +6,8 @@ import PrimeiroAcesso from './Pages/PrimeiroAcesso'
 import ConsoleLogado from './Pages/ConsoleLogado'
 import ListarPacientes from './Pages/ListarPacientes'
 import ListarMedicamentos from './Pages/ListarMedicamentos'
+import CadastrarAdministrador from './Pages/CadastrarAdministrador'
+import CadastrarPaciente from './Pages/CadastrarPaciente'
 
 
 
@@ -26,6 +28,8 @@ function App() {
           <Route path='ConsoleLogado' element={<ConsoleLogado/>}/>
           <Route path='listaDePacientes' element={<ListarPacientes/>}/>
           <Route path='listaDeMedicamentos' element={<ListarMedicamentos/>}/>
+          <Route path='cadastrarAdministrador' element={<CadastrarAdministrador/>}/>
+          <Route path='cadastrarPaciente' element={<CadastrarPaciente/>}/>
           
           
           
