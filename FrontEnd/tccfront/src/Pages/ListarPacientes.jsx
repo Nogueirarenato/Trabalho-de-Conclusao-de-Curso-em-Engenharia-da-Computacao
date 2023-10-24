@@ -10,7 +10,7 @@ import {
  } from "react-bootstrap";
 
 
-const PaginaDeAdministradores= () => {
+const PaginaDePacientes= () => {
 
 let vetor = []
 let indice = -1
@@ -19,20 +19,10 @@ let convertString = ""
 
     let [resposta, setResposta] = useState([]);
 
-function ListarAdministradores(){
-    fetch(Url + "ListarAdministradores").then(response => {
-
-       
-    response.json();
-
-    }).then(data=>{
-        console.log
-    })
-}
 
 useEffect(() => {
     // GET request using fetch inside useEffect React hook
-    fetch(Url + "ListarAdministradores")
+    fetch(Url + "ListarPacientes")
         .then(response => response.json())
         .then(data =>{console.log(data); setResposta(data)});
 
@@ -44,16 +34,23 @@ useEffect(() => {
     return (
  
        <div className="caixa">
-       <h1>Lista de Administradores</h1>
+       <h1>Lista de Pacientes</h1>
 
 
        <div className="tabela-hosts">
                             <table className="tableHostGroup">
                                 <thead className="primeiralinhaHostGroup">
                                     <tr>
-                                        <th className="leftHostGroup">ID</th>
-                                        <th className="leftHostGroup">Login</th>
-                                        <th className="leftHostGroup">Senha</th>
+
+   
+                                        <th className="leftHostGroup">Id</th>
+                                        <th className="leftHostGroup">Nome</th>
+                                        <th className="leftHostGroup">Idade</th>
+                                        <th className="leftHostGroup">Telefone</th>
+                                        <th className="leftHostGroup">Responsável 1</th>
+                                        <th className="leftHostGroup">Tel. Res. 1</th>
+                                        <th className="leftHostGroup">Responsável 2</th>
+                                        <th className="leftHostGroup">Tel. Res. 2</th>
                                         {/* <th className="leftHostGroup">Apagar</th> */}
                                        
                                     </tr>
@@ -61,23 +58,22 @@ useEffect(() => {
                                 <tbody id="myTable">
                                     {
                                         resposta.map(element => {
-                                            vetor.push(element.login)
-                                            convertString = element.login
+                                            vetor.push(element.nome)
+                                            convertString = element.nome
                                             convertString = convertString.toString()
                                             vetorName.push(convertString)
                                             indice++
                                             return (
                                                 <tr className="linhaHostGroup">
                                                     <td className="centerNum" >{element.id}</td>
-                                                    <td className="leftHostGroup">{element.login}</td>
-                                                    <td className="leftHostGroup">{element.senha}</td>
-                                                    <td><Button className="btn-block btn-blocktime"type='submit' value="Entrar"  >
-                    Apagar
-                </Button></td>
-                <td><Button className="btn-block btn-blocktime"type='submit' value="Entrar"  >
-                    Editar
-                </Button></td>
-                                                    
+                                                    <td className="leftHostGroup">{element.nome}</td>
+                                                    <td className="leftHostGroup">{element.idade}</td>
+                                                    <td className="leftHostGroup">{element.telefone}</td>
+                                                    <td className="leftHostGroup">{element.responsavel_1}</td>
+                                                    <td className="leftHostGroup">{element.tel_responsavel_1}</td>
+                                                    <td className="leftHostGroup">{element.responsavel_2}</td>
+                                                    <td className="leftHostGroup">{element.tel_responsavel_2}</td>
+                                                   
                                                     
                                                     {/* <td className="centerNum"><a onClick={this.janelaModal.bind(this, vetor[indice], vetorName[indice])} >Listar Eventos</a></td> */}
                                                 </tr>)
@@ -100,4 +96,4 @@ useEffect(() => {
     );
 }
 
-export default PaginaDeAdministradores;
+export default PaginaDePacientes;

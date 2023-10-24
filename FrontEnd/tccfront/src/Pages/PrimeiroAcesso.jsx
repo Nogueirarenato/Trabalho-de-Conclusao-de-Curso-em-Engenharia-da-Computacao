@@ -18,8 +18,10 @@ const Login= () => {
 <div className="caixa">
    <div >
     <div className='textPrimeiroTitulo'><h2>Primeiro Acesso</h2></div>
-    <div className='textPrimeiroAcesso'><h3>Para efetuar o primeiro acesso entre em contato com um dos desenvolvedores:</h3></div>
     
+    <div className='textPrimeiroAcesso'><h3>Para efetuar o primeiro acesso utilize o login padrão: usuário "admin", senha: "admin". </h3></div>
+    
+    <div className='textPrimeiroAcesso'><h3>Ou entre em contato com um dos desenvolvedores:</h3></div>
     <div className='textPrimeiroAcesso'><h3>Bruna    email: 2003356@aluno.univesp.br</h3></div>
     <div className='textPrimeiroAcesso'><h3>Cynthia  email: 2005192@aluno.univesp.br</h3></div>
     <div className='textPrimeiroAcesso'><h3>Danielle email: 2000522@aluno.univesp.br</h3></div>
