@@ -144,14 +144,17 @@ app.post("/api/VerificarLogin", (req, res) => {
             if (Object.hasOwnProperty.call(loginBanco, dataValues)) {
            const element = loginBanco[dataValues];
            console.log(`element.login = ${element.login}    element.senha= ${element.senha}`)
-           if(element.login == login && element.senha == senha){ res.sendStatus(200); trigger =2}
+           if(element.login == login && element.senha == senha){ trigger =2;}
          
             }
         }
 
         
 
-    }).then(()=>{if(trigger==1)res.sendStatus(401);})
+    }).then(()=>{
+        if(trigger == 2){res.sendStatus(200)}
+        else(res.sendStatus(401))
+    })
 
 
 })
