@@ -11,7 +11,7 @@ import {
 
 
 
-const CadastrarAdministrador = () => {
+const CadastrarPaciente = () => {
     const navigate = useNavigate();
 
     let [login, setLogin] = useState("");
