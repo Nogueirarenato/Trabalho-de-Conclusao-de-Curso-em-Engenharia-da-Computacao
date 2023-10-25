@@ -81,7 +81,7 @@ const PaginaDeAdministradores = () => {
                     </tbody>
                 </Table>
             </div>
-            <div className="alinharConsoleLogado2 margin-botton">
+            <div className="alinharConsoleLogado margin-botton">
 
             <Button className="btn-block btn-blocktime margin-botton" type='button' value="Entrar"  >
                 <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>

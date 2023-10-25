@@ -71,7 +71,7 @@ const PaginaDePacientes = () => {
                                         <td className="centerNum" >{element.id}</td>
                                         <td className="leftHostGroup">{element.nome}</td>
                                         <td className="leftHostGroup">{element.idade}</td>
-                                        <td className="leftHostGroup"><Button className="btn-block btn-blocktime" type='button' value={element.id}><Link to={"/ListarMedicacoes/"+element.id} className="divButton"> Visualizar </Link></Button></td>
+                                        <td className="leftHostGroup"><div ><Button style={{minWidth: '5vw'}}className="btn-block btn-blocktime" type='button' value={element.id}><Link to={"/ListarMedicacoes/"+element.id} className="divButton"> Visualizar </Link></Button></div></td>
                                         <td className="leftHostGroup">{element.telefone}</td>
                                         <td className="leftHostGroup">{element.responsavel_1}</td>
                                         <td className="leftHostGroup">{element.tel_responsavel_1}</td>
@@ -90,7 +90,7 @@ const PaginaDePacientes = () => {
                     </tbody>
                 </Table>
             </div>
-            <div className="alinharConsoleLogado2 margin-botton">
+            <div className="alinharConsoleLogado margin-botton">
                 <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
                     <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>
                 </Button>

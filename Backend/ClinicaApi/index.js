@@ -173,7 +173,7 @@ app.get("/api/ListarMedicamentos", (req, res) => {
     })
 
 })
-app.post("/api/CadastrarPaciente", (req, res) => {
+app.post("/api/CadastrarMedicacao", (req, res) => {
 
 
     var body = req.body;

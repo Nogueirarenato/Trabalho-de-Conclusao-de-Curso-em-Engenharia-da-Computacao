@@ -92,7 +92,7 @@ const CadastrarAdministrador = () => {
                             Cadastrar
                         </Button>
                     </div>
-                    <div className="alinharConsoleLogado2 margin-botton">
+                    <div className="alinharConsoleLogado margin-botton">
 
                         <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
                             <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>

@@ -12,7 +12,7 @@ const ConsoleLogado = () => {
     return (
 
 
-        <div className="caixa">
+        <div className="caixaLogado">
             <h1 className='tituloLogado'>Painel de Controle</h1>
             <div className='alinharConsoleLogado2'>
 
@@ -35,14 +35,14 @@ const ConsoleLogado = () => {
                         <Link to="/cadastrarPaciente" className="divButton">Cadastrar Paciente </Link>
                     </Button>
                     <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
-                        <Link  to="/" className="divButton">Cadastrar Medicação </Link>
-                        {/* to="/cadastrarMedicacao" */}
+                        <Link  to="/cadastrarMedicacao" className="divButton">Cadastrar Medicação </Link>
+                        
 
                     </Button>
                 </div>
             </div>
-            <div className='alinharConsoleLogado2 margin-botton'><Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
-                <Link to="/" className="divButton">Sair </Link>
+            <div className='alinharConsoleLogado margin-botton'><Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
+                <Link to="/" className="divButton" >Sair </Link>
             </Button></div>
         </div>
 

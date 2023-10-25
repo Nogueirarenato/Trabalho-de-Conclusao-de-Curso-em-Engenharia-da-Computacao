@@ -16,6 +16,7 @@ const PaginaDeMedicamentos = () => {
     let indice = -1
     let vetorName = []
     let convertString = ""
+    let StatusElemento=""
 
     let [resposta, setResposta] = useState([]);
 
@@ -64,6 +65,9 @@ const PaginaDeMedicamentos = () => {
                                 convertString = convertString.toString()
                                 vetorName.push(convertString)
                                 indice++
+                                if(element.status==0)StatusElemento="Aguardando";
+                                if(element.status==1)StatusElemento="Atrasado";
+                                
                                 return (
                                     <tr className="linhaHostGroup">
                                         <td className="centerNum" >{element.id}</td>
@@ -73,7 +77,7 @@ const PaginaDeMedicamentos = () => {
                                         <td className="leftHostGroup">{element.data_inicial[8]+element.data_inicial[9]+"/"+element.data_inicial[5]+element.data_inicial[6]+"/"+element.data_inicial[0]+element.data_inicial[1]+element.data_inicial[2]+element.data_inicial[3]+"      "+element.data_inicial[11]+element.data_inicial[12]+":"+element.data_inicial[14]+element.data_inicial[15]}</td>
                                         <td className="leftHostGroup">{element.data_final[8]+element.data_final[9]+"/"+element.data_final[5]+element.data_final[6]+"/"+element.data_final[0]+element.data_final[1]+element.data_final[2]+element.data_final[3]+"      "+element.data_final[11]+element.data_final[12]+":"+element.data_final[14]+element.data_final[15]}</td>
                                         <td className="leftHostGroup">{element.intervalo}</td>
-                                        <td className="leftHostGroup">{element.status}</td>
+                                        <td className="leftHostGroup">{StatusElemento}</td>
 
 
 
@@ -88,7 +92,7 @@ const PaginaDeMedicamentos = () => {
                     </tbody>
                 </Table>
             </div>
-            <div className="alinharConsoleLogado2 margin-botton">
+            <div className="alinharConsoleLogado margin-botton">
             <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
                 <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>
             </Button>
