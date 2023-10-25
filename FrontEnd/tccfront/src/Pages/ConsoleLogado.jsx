@@ -31,6 +31,9 @@ const ConsoleLogado = () => {
             <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
                 <Link to="/cadastrarPaciente" className="divButton">Cadastrar Paciente </Link>
             </Button>
+            <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
+                <Link to="/cadastrarMedicacao" className="divButton">Cadastrar Medicação </Link>
+            </Button>
         </div>
 
 

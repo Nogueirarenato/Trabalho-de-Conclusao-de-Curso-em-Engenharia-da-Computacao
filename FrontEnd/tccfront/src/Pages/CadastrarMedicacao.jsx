@@ -11,7 +11,7 @@ import {
 
 
 
-const CadastrarPaciente = () => {
+const CadastrarMedicacao = () => {
     const navigate = useNavigate();
 
     let [nome, setNome] = useState("")
@@ -112,10 +112,10 @@ const CadastrarPaciente = () => {
         <div>
 
             <div className="caixa">
-                <h1>Cadastrar Paciente</h1>
+                <h1>Cadastrar Medicação</h1>
                 <form onSubmit={enviaRequisicao.bind()}>
                     <input type="text" onChange={AtualizaNome.bind()} value={nome} className="input-text" placeholder="Insira o nome do paciente" required ></input>
-                    <input type="number" onChange={AtualizaIdade.bind()} value={idade} className="input-text" placeholder="Idade do paciente" required ></input>
+                    <input type="datetime-local" onChange={AtualizaIdade.bind()} value={idade} className="input-text" placeholder="Idade do paciente" required ></input>
                     <input type="text" onChange={AtualizaTelefone.bind()} value={telefone} className="input-text" placeholder="Telefone do Paciente (XX) XXXXX-XXXX" required ></input>
                     <input type="text" onChange={AtualizaResponsavel1.bind()} value={responsavel1} className="input-text" placeholder="Insira o nome do primeiro responsável" required ></input>
                     <input type="text" onChange={AtualizaTelResponsavel1.bind()} value={telResponsavel1} className="input-text" placeholder="Telefone do primeiro responsavel" required ></input>
@@ -139,4 +139,4 @@ const CadastrarPaciente = () => {
 
 }
 
-export default CadastrarPaciente;
+export default CadastrarMedicacao;

@@ -81,9 +81,9 @@ const CadastrarAdministrador = () => {
             <div className="caixa">
                 <h1>Cadastrar Administrador</h1>
                 <form onSubmit={enviaRequisicao.bind()}>
-                    <input type="text" onChange={AtualizaLogin.bind()} value={login} className="input-text" placeholder="Insira seu novo usuário" ></input>
-                    <input type="password" onChange={AtualizaSenha.bind()} value={senha} placeholder="Insira sua senha" className="input-text"></input>
-                    <input type="password" onChange={AtualizaSenha2.bind()} value={senha2} placeholder="Confirme sua senha" className="input-text"></input>
+                    <input type="text" onChange={AtualizaLogin.bind()} value={login} className="input-text" placeholder="Insira seu novo usuário" required></input>
+                    <input type="password" onChange={AtualizaSenha.bind()} value={senha} placeholder="Insira sua senha" className="input-text" required></input>
+                    <input type="password" onChange={AtualizaSenha2.bind()} value={senha2} placeholder="Confirme sua senha" className="input-text" required></input>
                     <h2>{mensagemDeErro}</h2>
                     <Button className="btn-block btn-blocktime" type='submit' value="Cadastrar"  >
                         Cadastrar

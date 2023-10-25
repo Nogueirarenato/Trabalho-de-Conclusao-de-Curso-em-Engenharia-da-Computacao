@@ -173,6 +173,53 @@ app.get("/api/ListarMedicamentos", (req, res) => {
     })
 
 })
+app.post("/api/CadastrarPaciente", (req, res) => {
+
+
+    var body = req.body;
+    var medicamento = req.body.medicamento;
+    var dose = req.body.dose;
+    var data_inicial = req.body.data_inicial;
+    var data_final = req.body.data_final;
+    var intervalo = req.body.intervalo;
+    var intervaloInt = parseInt(intervalo);
+    var status = req.body.status;
+    var statusInt = parseInt(status);
+    var pacienteId = req.body.pacienteId;
+    var pacienteIdInt = parseInt(pacienteId)
+    console.log(body);
+
+
+
+    Medicamentos.create(
+        {
+            medicamento: medicamento,
+            dose: dose,
+            data_inicial: data_inicial,
+            data_final: data_final,
+            intervalo: intervaloInt,
+            status: statusInt,
+            pacienteId: pacienteIdInt
+
+
+        }
+    ).then(
+        () => {
+            console.log("MEDICACAO  CADASTRADO!!")
+
+        }
+    ).then(() => {
+        res.sendStatus(200);
+    }).catch(err => {
+        console.log("Deu erro...")
+        res.sendStatus(400);
+        console.log(err)
+    })
+
+
+
+
+})
 
 
 
