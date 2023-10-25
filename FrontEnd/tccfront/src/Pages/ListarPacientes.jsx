@@ -8,6 +8,8 @@ import './Index.css';
 import {
     Button
 } from "react-bootstrap";
+import Table from 'react-bootstrap/Table';
+import './ListarAdministradores.css'
 
 
 const PaginaDePacientes = () => {
@@ -33,12 +35,12 @@ const PaginaDePacientes = () => {
 
     return (
 
-        <div className="caixa">
-            <h1>Lista de Pacientes</h1>
+        <div className="caixaPaciente">
+            <h1 className="tituloLogado alinharConsoleLogado">Lista de Pacientes</h1>
 
 
             <div className="tabela-hosts">
-                <table className="tableHostGroup">
+                <Table striped bordered hover className="opaco">
                     <thead className="primeiralinhaHostGroup">
                         <tr>
 
@@ -46,6 +48,7 @@ const PaginaDePacientes = () => {
                             <th className="leftHostGroup">Id</th>
                             <th className="leftHostGroup">Nome</th>
                             <th className="leftHostGroup">Idade</th>
+                            <th className="leftHostGroup">Medicações</th>
                             <th className="leftHostGroup">Telefone</th>
                             <th className="leftHostGroup">Responsável 1</th>
                             <th className="leftHostGroup">Tel. Res. 1</th>
@@ -68,6 +71,7 @@ const PaginaDePacientes = () => {
                                         <td className="centerNum" >{element.id}</td>
                                         <td className="leftHostGroup">{element.nome}</td>
                                         <td className="leftHostGroup">{element.idade}</td>
+                                        <td className="leftHostGroup"><Button className="btn-block btn-blocktime" type='button' value={element.id}><Link to={"/ListarMedicacoes/"+element.id} className="divButton"> Visualizar </Link></Button></td>
                                         <td className="leftHostGroup">{element.telefone}</td>
                                         <td className="leftHostGroup">{element.responsavel_1}</td>
                                         <td className="leftHostGroup">{element.tel_responsavel_1}</td>
@@ -84,13 +88,13 @@ const PaginaDePacientes = () => {
 
 
                     </tbody>
-                </table>
+                </Table>
             </div>
-
-            <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
-                <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>
-            </Button>
-
+            <div className="alinharConsoleLogado2 margin-botton">
+                <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
+                    <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>
+                </Button>
+            </div>
         </div>
 
     );

@@ -5,9 +5,9 @@ import Logo2 from '../img/engenhariaComputacao.png';
 import Url from '../Services/httpAPI'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Index.css';
-import {
-    Button
-} from "react-bootstrap";
+import './ListarAdministradores.css'
+import { Button } from "react-bootstrap";
+import Table from 'react-bootstrap/Table';
 
 
 const PaginaDeMedicamentos = () => {
@@ -33,12 +33,12 @@ const PaginaDeMedicamentos = () => {
 
     return (
 
-        <div className="caixa">
-            <h1>Lista de Medicamentos</h1>
+        <div className="caixaAdministradores">
+            <h1 className="tituloLogado alinharConsoleLogado">Lista de Medicamentos</h1>
 
 
             <div className="tabela-hosts">
-                <table className="tableHostGroup">
+                <Table striped bordered hover className="opaco">
                     <thead className="primeiralinhaHostGroup">
                         <tr>
 
@@ -70,8 +70,8 @@ const PaginaDeMedicamentos = () => {
                                         <td className="centerNum" >{element.pacienteId}</td>
                                         <td className="leftHostGroup">{element.medicamento}</td>
                                         <td className="leftHostGroup">{element.dose}</td>
-                                        <td className="leftHostGroup">{element.data_inicial}</td>
-                                        <td className="leftHostGroup">{element.data_final}</td>
+                                        <td className="leftHostGroup">{element.data_inicial[8]+element.data_inicial[9]+"/"+element.data_inicial[5]+element.data_inicial[6]+"/"+element.data_inicial[0]+element.data_inicial[1]+element.data_inicial[2]+element.data_inicial[3]+"      "+element.data_inicial[11]+element.data_inicial[12]+":"+element.data_inicial[14]+element.data_inicial[15]}</td>
+                                        <td className="leftHostGroup">{element.data_final[8]+element.data_final[9]+"/"+element.data_final[5]+element.data_final[6]+"/"+element.data_final[0]+element.data_final[1]+element.data_final[2]+element.data_final[3]+"      "+element.data_final[11]+element.data_final[12]+":"+element.data_final[14]+element.data_final[15]}</td>
                                         <td className="leftHostGroup">{element.intervalo}</td>
                                         <td className="leftHostGroup">{element.status}</td>
 
@@ -86,13 +86,14 @@ const PaginaDeMedicamentos = () => {
 
 
                     </tbody>
-                </table>
+                </Table>
             </div>
-
+            <div className="alinharConsoleLogado2 margin-botton">
             <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
                 <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>
             </Button>
 
+        </div>
         </div>
 
     );

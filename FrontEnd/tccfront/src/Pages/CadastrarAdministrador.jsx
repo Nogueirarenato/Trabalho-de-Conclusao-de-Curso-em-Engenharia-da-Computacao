@@ -8,6 +8,7 @@ import './Index.css';
 import {
     Button
 } from "react-bootstrap";
+import './ListarAdministradores.css'
 
 
 
@@ -79,19 +80,24 @@ const CadastrarAdministrador = () => {
         <div>
 
             <div className="caixa">
-                <h1>Cadastrar Administrador</h1>
+                <h1 className="tituloLogado alinharConsoleLogado">Cadastrar Administrador</h1>
                 <form onSubmit={enviaRequisicao.bind()}>
                     <input type="text" onChange={AtualizaLogin.bind()} value={login} className="input-text" placeholder="Insira seu novo usuário" required></input>
                     <input type="password" onChange={AtualizaSenha.bind()} value={senha} placeholder="Insira sua senha" className="input-text" required></input>
                     <input type="password" onChange={AtualizaSenha2.bind()} value={senha2} placeholder="Confirme sua senha" className="input-text" required></input>
                     <h2>{mensagemDeErro}</h2>
-                    <Button className="btn-block btn-blocktime" type='submit' value="Cadastrar"  >
-                        Cadastrar
-                    </Button>
 
-                    <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
-                        <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>
-                    </Button>
+                    <div className="alinharConsoleLogado2">
+                        <Button className="btn-block btn-blocktime" type='submit' value="Cadastrar"  >
+                            Cadastrar
+                        </Button>
+                    </div>
+                    <div className="alinharConsoleLogado2 margin-botton">
+
+                        <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
+                            <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>
+                        </Button>
+                    </div>
                 </form>
             </div>
 

@@ -73,13 +73,13 @@ const CadastrarPaciente = () => {
             let user = {
 
 
-    nome: nome,
-    idade: idade,
-    telefone: telefone,
-    responsavel_1: responsavel1,
-    tel_responsavel_1: telResponsavel1,
-    tel_responsavel_2:  telResponsavel2,
-    responsavel_2: responsavel2
+                nome: nome,
+                idade: idade,
+                telefone: telefone,
+                responsavel_1: responsavel1,
+                tel_responsavel_1: telResponsavel1,
+                tel_responsavel_2: telResponsavel2,
+                responsavel_2: responsavel2
 
 
             }
@@ -112,7 +112,7 @@ const CadastrarPaciente = () => {
         <div>
 
             <div className="caixa">
-                <h1>Cadastrar Paciente</h1>
+                <h1 className="tituloLogado alinharConsoleLogado">Cadastrar Paciente</h1>
                 <form onSubmit={enviaRequisicao.bind()}>
                     <input type="text" onChange={AtualizaNome.bind()} value={nome} className="input-text" placeholder="Insira o nome do paciente" required ></input>
                     <input type="number" onChange={AtualizaIdade.bind()} value={idade} className="input-text" placeholder="Idade do paciente" required ></input>
@@ -122,13 +122,17 @@ const CadastrarPaciente = () => {
                     <input type="text" onChange={AtualizaResponsavel2.bind()} value={responsavel2} className="input-text" placeholder="Insira o nome do segundo responsável" required ></input>
                     <input type="text" onChange={AtualizaTelResponsavel2.bind()} value={telResponsavel2} className="input-text" placeholder="Telefone do segundo responsavel" required ></input>
                     <h2>{mensagemDeErro}</h2>
-                    <Button className="btn-block btn-blocktime" type='submit' value="Cadastrar"  >
-                        Cadastrar
-                    </Button>
+                    <div className="alinharConsoleLogado2 margin-botton">
+                        <Button className="btn-block btn-blocktime" type='submit' value="Cadastrar"  >
+                            Cadastrar
+                        </Button>
 
-                    <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
-                        <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>
-                    </Button>
+                    </div>
+                    <div className="alinharConsoleLogado2 margin-botton">
+                        <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
+                            <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>
+                        </Button>
+                    </div>
                 </form>
             </div>
 

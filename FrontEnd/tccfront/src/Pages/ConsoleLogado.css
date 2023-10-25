@@ -1,0 +1,36 @@
+.alinharConsoleLogado{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3vh;
+    
+}
+
+.alinharConsoleLogado button{
+    min-width: 15vw;
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+    font-size: 1.2em;
+    max-width: 1vh;
+    margin-left: 1vw;
+    margin-bottom: 1vh;
+}
+.tituloLogado{
+    color:red;
+    margin-top: 3vh;
+    text-align: center;
+}
+
+.alinharConsoleLogado2{
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3vh;
+   
+}
+
+.margin-botton{
+    padding-bottom: 1.5vh;
+}

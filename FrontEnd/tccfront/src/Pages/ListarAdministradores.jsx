@@ -5,9 +5,9 @@ import Logo2 from '../img/engenhariaComputacao.png';
 import Url from '../Services/httpAPI'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Index.css';
-import {
-    Button
-} from "react-bootstrap";
+import './ListarAdministradores.css'
+import { Button } from "react-bootstrap";
+import Table from 'react-bootstrap/Table';
 
 
 const PaginaDeAdministradores = () => {
@@ -19,16 +19,6 @@ const PaginaDeAdministradores = () => {
 
     let [resposta, setResposta] = useState([]);
 
-    function ListarAdministradores() {
-        fetch(Url + "ListarAdministradores").then(response => {
-
-
-            response.json();
-
-        }).then(data => {
-            console.log
-        })
-    }
 
     useEffect(() => {
         // GET request using fetch inside useEffect React hook
@@ -43,22 +33,23 @@ const PaginaDeAdministradores = () => {
 
     return (
 
-        <div className="caixa">
-            <h1>Lista de Administradores</h1>
+        <div className="caixaAdministradores">
+            <h1 className="tituloLogado alinharConsoleLogado">Lista de Administradores</h1>
 
 
-            <div className="tabela-hosts">
-                <table className="tableHostGroup">
+            <div className="tabela-hosts alinharConsoleLogado2">
+                <Table  striped bordered hover className="opaco">
                     <thead className="primeiralinhaHostGroup">
-                        <tr>
-                            <th className="leftHostGroup">ID</th>
-                            <th className="leftHostGroup">Login</th>
-                            <th className="leftHostGroup">Senha</th>
+                        <tr scope="col" className="alinharConsoleLogado3">
+                            <th  scope="col" className="leftHostGroup ">ID</th>
+                            <th scope="col" className="leftHostGroup">Login</th>
+                            <th scope="col" className="leftHostGroup">Senha</th>
+                            <th colSpan={2} scope="col" className="leftHostGroup">Ação</th>
                             {/* <th className="leftHostGroup">Apagar</th> */}
 
                         </tr>
                     </thead>
-                    <tbody id="myTable">
+                    <tbody id="myTable alinharConsoleLogado3">
                         {
                             resposta.map(element => {
                                 vetor.push(element.login)
@@ -67,8 +58,8 @@ const PaginaDeAdministradores = () => {
                                 vetorName.push(convertString)
                                 indice++
                                 return (
-                                    <tr className="linhaHostGroup">
-                                        <td className="centerNum" >{element.id}</td>
+                                    <tr className="linhaHostGroup alinharConsoleLogado3">
+                                        <td scope="row" className="centerNum" >{element.id}</td>
                                         <td className="leftHostGroup">{element.login}</td>
                                         <td className="leftHostGroup">{element.senha}</td>
                                         <td><Button className="btn-block btn-blocktime" type='submit' value="Entrar"  >
@@ -88,13 +79,14 @@ const PaginaDeAdministradores = () => {
 
 
                     </tbody>
-                </table>
+                </Table>
             </div>
+            <div className="alinharConsoleLogado2 margin-botton">
 
-            <Button className="btn-block btn-blocktime" type='button' value="Entrar"  >
+            <Button className="btn-block btn-blocktime margin-botton" type='button' value="Entrar"  >
                 <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>
             </Button>
-
+            </div>
         </div>
 
     );
