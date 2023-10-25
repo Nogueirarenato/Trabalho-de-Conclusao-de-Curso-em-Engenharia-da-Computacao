@@ -97,7 +97,7 @@ const Login = () => {
 
                     </div>
                 </div>
-                <p className='powered'>Powered by Turma 004 - TCC540 -  UNIVESP - 2º semestre de 2023 </p>
+                <p className='powered'>Desenvolvido por Turma 004 - TCC540 -  UNIVESP - 2º semestre de 2023 </p>
             </section>
 
             {/* <Link to="/listaDeAdministradores" class="active">
