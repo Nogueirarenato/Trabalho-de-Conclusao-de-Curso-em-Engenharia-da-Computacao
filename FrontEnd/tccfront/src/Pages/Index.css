@@ -181,3 +181,16 @@ p {
     margin: auto;
     min-height: 200px;
 }
+
+.verde{
+color: green;
+}
+
+.amarelo{
+    color: yellow;
+}
+
+.vermelho{
+    color: red;
+
+}
