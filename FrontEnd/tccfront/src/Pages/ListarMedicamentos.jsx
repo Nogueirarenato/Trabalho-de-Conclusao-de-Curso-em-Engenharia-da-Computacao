@@ -17,9 +17,22 @@ const PaginaDeMedicamentos = () => {
     let vetorName = []
     let convertString = ""
     let StatusElemento = ""
+
+
+    let vetor2 = []
+    let indice2 = -1
+    let vetorName2 = []
+    let convertString2 = ""
+
+
+
+
+
     let classe
 
     let [resposta, setResposta] = useState([]);
+    let [resposta2, setResposta2] = useState([]);
+    let [reconhecer, setReconhecer] = useState("")
 
 
     useEffect(() => {
@@ -32,6 +45,22 @@ const PaginaDeMedicamentos = () => {
     }, []);
 
 
+    useEffect(() => {
+        // GET request using fetch inside useEffect React hook
+        fetch(Url + "ListarPacientes")
+            .then(response => response.json())
+            .then(data => { console.log(data); setResposta2(data) });
+
+        // empty dependency array means this effect will only run once (like componentDidMount in classes)
+    }, []);
+
+
+    function Reconhecer(event) {
+        event.preventDefault();
+        setReconhecer(event.target.value).then(()=>{alert(reconhecer)})
+        
+       
+    }
 
     return (
 
@@ -53,6 +82,7 @@ const PaginaDeMedicamentos = () => {
                             <th className="leftHostGroup">Data Final</th>
                             <th className="leftHostGroup">Intervalo (h)</th>
                             <th className="leftHostGroup">Status</th>
+                            <th className="leftHostGroup">Reconhecer</th>
 
                             {/* <th className="leftHostGroup">Apagar</th> */}
 
@@ -68,18 +98,42 @@ const PaginaDeMedicamentos = () => {
                                 indice++
                                 if (element.status == 0) { StatusElemento = "Aguardando"; classe = 'orange' }
                                 if (element.status == 1) { StatusElemento = "Atrasado"; classe = 'red' }
-                                if(element.status ==2){StatusElemento="OK"; classe='green'}
+                                if (element.status == 2) { StatusElemento = "OK"; classe = 'green' }
+
+                                resposta2.map(elemento => {
+                                    vetor2.push(elemento.nome)
+                                    convertString2 = elemento.nome
+                                    convertString2 = convertString2.toString()
+                                    vetorName2.push(convertString2)
+                                    if (elemento.id == element.pacienteId) element.pacienteId = elemento.nome;
+                                    indice2++
+                                })
 
                                 return (
                                     <tr className="linhaHostGroup">
                                         <td className="centerNum" >{element.id}</td>
-                                        <td className="centerNum" >{element.pacienteId}</td>
+                                        <td className="centerNum" >
+
+                                            {element.pacienteId}
+
+
+
+
+                                        </td>
                                         <td className="leftHostGroup">{element.medicamento}</td>
                                         <td className="leftHostGroup">{element.dose}</td>
                                         <td className="leftHostGroup">{element.data_inicial[8] + element.data_inicial[9] + "/" + element.data_inicial[5] + element.data_inicial[6] + "/" + element.data_inicial[0] + element.data_inicial[1] + element.data_inicial[2] + element.data_inicial[3] + "      " + element.data_inicial[11] + element.data_inicial[12] + ":" + element.data_inicial[14] + element.data_inicial[15]}</td>
                                         <td className="leftHostGroup">{element.data_final[8] + element.data_final[9] + "/" + element.data_final[5] + element.data_final[6] + "/" + element.data_final[0] + element.data_final[1] + element.data_final[2] + element.data_final[3] + "      " + element.data_final[11] + element.data_final[12] + ":" + element.data_final[14] + element.data_final[15]}</td>
                                         <td className="leftHostGroup">{element.intervalo}</td>
-                                        <td className="leftHostGroup"style={{color: classe}}>{StatusElemento}</td>
+                                        <td className="leftHostGroup" style={{ color: classe }}>{StatusElemento}</td>
+                                        <td className="leftHostGroup" style={{ color: classe }}>
+                                            <form onSubmit={Reconhecer.bind}>
+                                                <Button className="btn-block btn-blocktime" type='submit' value={element.id}  >
+                                                    Reconhecer
+                                                </Button>
+                                            </form>
+                                        </td>
+
 
 
 
