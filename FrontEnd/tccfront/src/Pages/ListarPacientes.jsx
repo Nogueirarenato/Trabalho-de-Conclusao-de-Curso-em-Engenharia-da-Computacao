@@ -18,6 +18,7 @@ const PaginaDePacientes = () => {
     let indice = -1
     let vetorName = []
     let convertString = ""
+    let value;
 
     let [resposta, setResposta] = useState([]);
 
@@ -31,7 +32,7 @@ const PaginaDePacientes = () => {
         // empty dependency array means this effect will only run once (like componentDidMount in classes)
     }, []);
 
-
+function Apagar(){}
 
     return (
 
@@ -54,6 +55,7 @@ const PaginaDePacientes = () => {
                             <th className="leftHostGroup">Tel. Res. 1</th>
                             <th className="leftHostGroup">Responsável 2</th>
                             <th className="leftHostGroup">Tel. Res. 2</th>
+                            <th className="leftHostGroup">Ações</th>
                             {/* <th className="leftHostGroup">Apagar</th> */}
 
                         </tr>
@@ -77,6 +79,10 @@ const PaginaDePacientes = () => {
                                         <td className="leftHostGroup">{element.tel_responsavel_1}</td>
                                         <td className="leftHostGroup">{element.responsavel_2}</td>
                                         <td className="leftHostGroup">{element.tel_responsavel_2}</td>
+                                        <td className="leftHostGroup"> <Button className="btn-block btn-blocktime" style={{ marginLeft: "5%" }} value={element.id} onClick={Apagar.bind(value)}  >
+                                                        Apagar
+                                                    </Button></td>
+                                       
 
 
                                         {/* <td className="centerNum"><a onClick={this.janelaModal.bind(this, vetor[indice], vetorName[indice])} >Listar Eventos</a></td> */}

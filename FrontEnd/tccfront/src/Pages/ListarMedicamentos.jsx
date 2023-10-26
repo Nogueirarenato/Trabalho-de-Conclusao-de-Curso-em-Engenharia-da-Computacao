@@ -18,11 +18,15 @@ const PaginaDeMedicamentos = () => {
     let convertString = ""
     let StatusElemento = ""
 
+    let display = "flex";
 
     let vetor2 = []
-    let indice2 = -1
+    let indice2 = 0
     let vetorName2 = []
     let convertString2 = ""
+    let value = "Teste"
+    let contador = 0;
+
 
 
 
@@ -55,11 +59,62 @@ const PaginaDeMedicamentos = () => {
     }, []);
 
 
+
+
+    function Apagar(event) {
+
+
+        let confircacao = confirm("Tem certeza que deseja apagar a medicação?")
+
+        console.log(confircacao)
+        if (confircacao == true) {
+            console.log(event.target.value)
+
+            let medicacao = {
+
+                id: event.target.value
+
+            }
+
+
+
+            fetch(Url + "ApagarMedicacao", {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(medicacao),
+            }).then(window.location.reload(true))
+        }
+
+    }
+
+
+
     function Reconhecer(event) {
-        event.preventDefault();
-        setReconhecer(event.target.value).then(()=>{alert(reconhecer)})
-        
-       
+        let confircacao = confirm("Tem certeza que deseja reconhecer a medicação?")
+
+        console.log(confircacao)
+        if (confircacao == true) {
+            console.log(event.target.value)
+
+            let medicacao = {
+
+                id: event.target.value
+
+            }
+
+
+
+            fetch(Url + "CadastrarMedicacao", {
+                method: 'PATCH',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(medicacao),
+            }).then(window.location.reload(true))
+        }
+
     }
 
     return (
@@ -82,7 +137,7 @@ const PaginaDeMedicamentos = () => {
                             <th className="leftHostGroup">Data Final</th>
                             <th className="leftHostGroup">Intervalo (h)</th>
                             <th className="leftHostGroup">Status</th>
-                            <th className="leftHostGroup">Reconhecer</th>
+                            <th className="leftHostGroup">Ações</th>
 
                             {/* <th className="leftHostGroup">Apagar</th> */}
 
@@ -107,6 +162,9 @@ const PaginaDeMedicamentos = () => {
                                     vetorName2.push(convertString2)
                                     if (elemento.id == element.pacienteId) element.pacienteId = elemento.nome;
                                     indice2++
+                                    if (element.status == 2) { display = 'none' }
+                                    else (display = "flex")
+
                                 })
 
                                 return (
@@ -125,12 +183,18 @@ const PaginaDeMedicamentos = () => {
                                         <td className="leftHostGroup">{element.data_inicial[8] + element.data_inicial[9] + "/" + element.data_inicial[5] + element.data_inicial[6] + "/" + element.data_inicial[0] + element.data_inicial[1] + element.data_inicial[2] + element.data_inicial[3] + "      " + element.data_inicial[11] + element.data_inicial[12] + ":" + element.data_inicial[14] + element.data_inicial[15]}</td>
                                         <td className="leftHostGroup">{element.data_final[8] + element.data_final[9] + "/" + element.data_final[5] + element.data_final[6] + "/" + element.data_final[0] + element.data_final[1] + element.data_final[2] + element.data_final[3] + "      " + element.data_final[11] + element.data_final[12] + ":" + element.data_final[14] + element.data_final[15]}</td>
                                         <td className="leftHostGroup">{element.intervalo}</td>
-                                        <td className="leftHostGroup" style={{ color: classe }}>{StatusElemento}</td>
+                                        <td className="leftHostGroup" style={{ backgroundColor: classe, fontWeight:'500',  color: "white" }}>{StatusElemento}</td>
                                         <td className="leftHostGroup" style={{ color: classe }}>
-                                            <form onSubmit={Reconhecer.bind}>
-                                                <Button className="btn-block btn-blocktime" type='submit' value={element.id}  >
-                                                    Reconhecer
-                                                </Button>
+                                            <form >
+                                                <div style={{ display: 'flex' }}>
+                                                    <Button className="btn-block btn-blocktime" style={{ display: display, marginLeft: "5%" }} value={element.id} onClick={Reconhecer.bind(value)}  >
+                                                        Reconhecer
+                                                    </Button>
+
+                                                    <Button className="btn-block btn-blocktime" style={{ marginLeft: "5%" }} value={element.id} onClick={Apagar.bind(value)}  >
+                                                        Apagar
+                                                    </Button>
+                                                </div>
                                             </form>
                                         </td>
 

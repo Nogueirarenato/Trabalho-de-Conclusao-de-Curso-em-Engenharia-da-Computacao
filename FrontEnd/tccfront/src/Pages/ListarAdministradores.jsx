@@ -16,7 +16,8 @@ const PaginaDeAdministradores = () => {
     let indice = -1
     let vetorName = []
     let convertString = ""
-
+    let value
+    let display="flex"
     let [resposta, setResposta] = useState([]);
 
 
@@ -28,6 +29,35 @@ const PaginaDeAdministradores = () => {
 
         // empty dependency array means this effect will only run once (like componentDidMount in classes)
     }, []);
+
+    function Apagar(event) {
+
+
+        let confircacao = confirm("Tem certeza que deseja apagar o Administrador?")
+
+        console.log(confircacao)
+        if (confircacao == true) {
+            console.log(event.target.value)
+
+            let administrador = {
+
+                id: event.target.value
+
+            }
+
+
+
+            fetch(Url + "ApagarAdministrador", {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(administrador),
+            }).then(window.location.reload(true))
+        }
+
+    }
+
 
 
 
@@ -44,7 +74,7 @@ const PaginaDeAdministradores = () => {
                             <th  scope="col" className="leftHostGroup ">ID</th>
                             <th scope="col" className="leftHostGroup">Login</th>
                             <th scope="col" className="leftHostGroup">Senha</th>
-                            <th colSpan={2} scope="col" className="leftHostGroup">Ação</th>
+                            <th scope="col" className="leftHostGroup">Ações</th>
                             {/* <th className="leftHostGroup">Apagar</th> */}
 
                         </tr>
@@ -57,17 +87,17 @@ const PaginaDeAdministradores = () => {
                                 convertString = convertString.toString()
                                 vetorName.push(convertString)
                                 indice++
+                                // if(element.login == "admin" && element.senha == "admin"){display ="none"}
+                                // else{display="flex"}
                                 return (
                                     <tr className="linhaHostGroup alinharConsoleLogado3">
                                         <td scope="row" className="centerNum" >{element.id}</td>
                                         <td className="leftHostGroup">{element.login}</td>
                                         <td className="leftHostGroup">{element.senha}</td>
-                                        <td><Button className="btn-block btn-blocktime" type='submit' value="Entrar"  >
-                                            Apagar
-                                        </Button></td>
-                                        <td><Button className="btn-block btn-blocktime" type='submit' value="Entrar"  >
-                                            Editar
-                                        </Button></td>
+                                        <td> <Button className="btn-block btn-blocktime" style={{ marginLeft: "5%", display: display }} value={element.id} onClick={Apagar.bind(value)}  >
+                                                        Apagar
+                                                    </Button></td>
+                                       
 
 
                                         {/* <td className="centerNum"><a onClick={this.janelaModal.bind(this, vetor[indice], vetorName[indice])} >Listar Eventos</a></td> */}

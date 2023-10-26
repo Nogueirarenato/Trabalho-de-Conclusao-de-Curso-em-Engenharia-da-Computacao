@@ -142,9 +142,9 @@ const CadastrarMedicacao = () => {
                     <input type="datetime-local" onChange={AtualizaDataFinal.bind()} value={dataFinal} className="input-text" placeholder="Fim do tratamento" required ></input>
                     <input type="number" min="1" max="24" onChange={AtualizaIntervalo.bind()} value={intervalo} className="input-text" placeholder="Intervalo da medicação" required ></input>
                     <label htmlFor="ListaDePaciente" className="alinharConsoleLogado2" style={{marginBotton: 0, padding: 0, fontSize: '1.5em'}} >Escolha o Paciente</label>
-                    <div className="alinharConsoleLogado2 margin-botton width50">
+                    <div className="alinharConsoleLogado margin-botton" style={{width: '100%'}}>
                         
-                        <select id="ListaDePacientes" name="cars" size="3" onChange={AtualizaPaciente.bind()}>
+                        <select id="ListaDePacientes" name="cars" size="3" style={{width: '50%'}} onChange={AtualizaPaciente.bind()}>
 
 
                             {
