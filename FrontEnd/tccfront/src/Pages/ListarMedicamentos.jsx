@@ -25,8 +25,7 @@ const PaginaDeMedicamentos = () => {
     let vetorName2 = []
     let convertString2 = ""
     let value = "Teste"
-    let contador = 0;
-    let variavel;
+ 
 
 
 
@@ -37,7 +36,8 @@ const PaginaDeMedicamentos = () => {
 
     let [resposta, setResposta] = useState([]);
     let [resposta2, setResposta2] = useState([]);
-    let [reconhecer, setReconhecer] = useState("")
+    let [reconhecer, setReconhecer] = useState("");
+    let [timerReload, setTimerReload] = useState(60);
 
 
     useEffect(() => {
@@ -92,6 +92,8 @@ const PaginaDeMedicamentos = () => {
 
     }
 
+
+   
 
 
     function Reconhecer(event) {

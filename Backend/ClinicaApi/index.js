@@ -6,6 +6,7 @@ const cors = require('cors');
 const bodyParser = require("body-parser");
 const Medicamentos = require("./medicamentos/Medicamentos");
 const Pacientes = require("./pacientes/Pacientes");
+const { where } = require("sequelize");
 
 const port = process.env.PORT_APP || 21049;
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -159,7 +160,7 @@ app.post("/api/VerificarLogin", (req, res) => {
 
 })
 
-app.delete("/api/ApagarAdministrador",(req, res)=>{
+app.delete("/api/ApagarAdministrador", (req, res) => {
     var id = req.body.id;
     var idInt = parseInt(id);
 
@@ -179,7 +180,7 @@ app.delete("/api/ApagarAdministrador",(req, res)=>{
             console.error("Erro ao excluir medicação:", error);
             res.status(500).json({ message: "Erro interno do servidor" });
         });
-});    
+});
 
 
 
@@ -349,6 +350,44 @@ app.post("/api/CadastrarPaciente", (req, res) => {
 
 
 })
+
+app.delete("/api/ApagarPaciente", (req, res) => {
+    var id = req.body.id;
+    var idInt = parseInt(id);
+
+    // Encontrar todos os medicamentos relacionados ao paciente
+    Medicamentos.findAll({ where: { pacienteId: idInt } })
+        .then((medicamentos) => {
+            if (medicamentos && medicamentos.length > 0) {
+                // Se medicamentos forem encontrados, excluí-los
+                return Medicamentos.destroy({ where: { pacienteId: idInt } });
+            } else {
+                // Se nenhum medicamento for encontrado, enviar uma mensagem e interromper o processo
+                return Promise.resolve(); // Resolvendo uma promise vazia para continuar para o próximo bloco `then`
+            }
+        })
+        .then(() => {
+            // Encontrar o paciente pelo ID
+            return Pacientes.findByPk(idInt);
+        })
+        .then((paciente) => {
+            if (paciente) {
+                // Se o paciente existir, excluí-lo
+                return paciente.destroy();
+            } else {
+                // Se o paciente não existir, enviar uma mensagem de não encontrado
+                res.status(404).json({ message: "Paciente não encontrado" });
+            }
+        })
+        .then(() => {
+            // Se tudo for bem-sucedido, enviar uma mensagem de sucesso
+            res.json({ message: "Paciente e medicamentos deletados com sucesso" });
+        })
+        .catch((error) => {
+            console.error("Erro ao excluir paciente:", error);
+            res.status(500).json({ message: "Erro interno do servidor" });
+        });
+});
 
 
 

@@ -32,7 +32,35 @@ const PaginaDePacientes = () => {
         // empty dependency array means this effect will only run once (like componentDidMount in classes)
     }, []);
 
-function Apagar(){}
+function Apagar(event){
+    event.preventDefault();
+    let confircacao = confirm("Tem certeza que deseja apagar o Paciente?")
+
+
+    if (confircacao == true) {
+
+
+        let paciente = {
+
+            id: event.target.value
+
+        }
+
+
+
+        setTimeout(() => {
+            fetch(Url + "ApagarPaciente", {
+                method: 'DELETE',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(paciente),
+            }).then(window.location.reload(true))
+        }, 1000)
+    }
+
+
+}
 
     return (
 
@@ -69,7 +97,7 @@ function Apagar(){}
                                 vetorName.push(convertString)
                                 indice++
                                 return (
-                                    <tr className="linhaHostGroup">
+                                    <tr className="linhaHostGroup"key={element.id}>
                                         <td className="centerNum" >{element.id}</td>
                                         <td className="leftHostGroup">{element.nome}</td>
                                         <td className="leftHostGroup">{element.idade}</td>
