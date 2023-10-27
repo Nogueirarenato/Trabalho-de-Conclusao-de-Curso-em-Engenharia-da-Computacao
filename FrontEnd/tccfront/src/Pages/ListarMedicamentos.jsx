@@ -26,6 +26,7 @@ const PaginaDeMedicamentos = () => {
     let convertString2 = ""
     let value = "Teste"
     let contador = 0;
+    let variavel;
 
 
 
@@ -43,7 +44,7 @@ const PaginaDeMedicamentos = () => {
         // GET request using fetch inside useEffect React hook
         fetch(Url + "ListarMedicamentos")
             .then(response => response.json())
-            .then(data => { console.log(data); setResposta(data) });
+            .then(data => { setResposta(data) });
 
         // empty dependency array means this effect will only run once (like componentDidMount in classes)
     }, []);
@@ -53,7 +54,7 @@ const PaginaDeMedicamentos = () => {
         // GET request using fetch inside useEffect React hook
         fetch(Url + "ListarPacientes")
             .then(response => response.json())
-            .then(data => { console.log(data); setResposta2(data) });
+            .then(data => { setResposta2(data) });
 
         // empty dependency array means this effect will only run once (like componentDidMount in classes)
     }, []);
@@ -66,25 +67,27 @@ const PaginaDeMedicamentos = () => {
 
         let confircacao = confirm("Tem certeza que deseja apagar a medicação?")
 
-        console.log(confircacao)
+
         if (confircacao == true) {
-            console.log(event.target.value)
+
 
             let medicacao = {
 
-                id: event.target.value
+                id: parseInt(event.target.value)
 
             }
 
 
 
-            fetch(Url + "ApagarMedicacao", {
-                method: 'DELETE',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(medicacao),
-            }).then(window.location.reload(true))
+            setTimeout(() => {
+                fetch(Url + "ApagarMedicacao", {
+                    method: 'DELETE',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(medicacao),
+                }).then(window.location.reload(true))
+            }, 1000)
         }
 
     }
@@ -92,27 +95,31 @@ const PaginaDeMedicamentos = () => {
 
 
     function Reconhecer(event) {
+
+
         let confircacao = confirm("Tem certeza que deseja reconhecer a medicação?")
 
-        console.log(confircacao)
+
         if (confircacao == true) {
-            console.log(event.target.value)
+
 
             let medicacao = {
 
-                id: event.target.value
+                id: parseInt(event.target.value)
 
             }
 
+            setTimeout(() => {
+                fetch(Url + "CadastrarMedicacao", {
+                    method: 'PATCH',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(medicacao),
+                }).then(window.location.reload(true))
+            }, 1000)
 
 
-            fetch(Url + "CadastrarMedicacao", {
-                method: 'PATCH',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(medicacao),
-            }).then(window.location.reload(true))
         }
 
     }
@@ -168,7 +175,7 @@ const PaginaDeMedicamentos = () => {
                                 })
 
                                 return (
-                                    <tr className="linhaHostGroup">
+                                    <tr className="linhaHostGroup" key={element.id}>
                                         <td className="centerNum" >{element.id}</td>
                                         <td className="centerNum" >
 
@@ -183,7 +190,7 @@ const PaginaDeMedicamentos = () => {
                                         <td className="leftHostGroup">{element.data_inicial[8] + element.data_inicial[9] + "/" + element.data_inicial[5] + element.data_inicial[6] + "/" + element.data_inicial[0] + element.data_inicial[1] + element.data_inicial[2] + element.data_inicial[3] + "      " + element.data_inicial[11] + element.data_inicial[12] + ":" + element.data_inicial[14] + element.data_inicial[15]}</td>
                                         <td className="leftHostGroup">{element.data_final[8] + element.data_final[9] + "/" + element.data_final[5] + element.data_final[6] + "/" + element.data_final[0] + element.data_final[1] + element.data_final[2] + element.data_final[3] + "      " + element.data_final[11] + element.data_final[12] + ":" + element.data_final[14] + element.data_final[15]}</td>
                                         <td className="leftHostGroup">{element.intervalo}</td>
-                                        <td className="leftHostGroup" style={{ backgroundColor: classe, fontWeight:'500',  color: "white" }}>{StatusElemento}</td>
+                                        <td className="leftHostGroup" style={{ backgroundColor: classe, fontWeight: '500', color: "white" }}>{StatusElemento}</td>
                                         <td className="leftHostGroup" style={{ color: classe }}>
                                             <form >
                                                 <div style={{ display: 'flex' }}>
