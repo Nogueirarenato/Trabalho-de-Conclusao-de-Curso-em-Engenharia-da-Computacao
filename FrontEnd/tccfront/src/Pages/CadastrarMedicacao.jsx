@@ -48,9 +48,16 @@ const CadastrarMedicacao = () => {
     }
 
     function AtualizaDataInicial(event) {
+        // event.preventDefault();
+        // setDataInicial(event.target.value)
+        // console.log(dataInicial)
+
         event.preventDefault();
         setDataInicial(event.target.value)
-        console.log(dataInicial)
+
+        let myDate = event.target.value
+
+        console.log(Date.parse(myDate))
     }
 
     function AtualizaDataFinal(event) {
@@ -88,41 +95,82 @@ const CadastrarMedicacao = () => {
 
     function enviaRequisicao(event) {
         event.preventDefault();
-        if (medicamento == "" || dose == "" || dataInicial == "" || dataFinal == "" || paciente == "" || intervalo == "") { setMensagemDeErro("Todos os campos devem ser preenchidos!!") }
-        else {
 
-            let dataInicialConvertida = dataInicial[0] + dataInicial[1] + dataInicial[2] + dataInicial[3] + "-" + dataInicial[5] + dataInicial[6] + "-" + dataInicial[8] + dataInicial[9] + " " + dataInicial[11] + dataInicial[12] + ":" + dataInicial[14] + dataInicial[15] + ":00"
-            let dataFinalConvertida = dataFinal[0] + dataFinal[1] + dataFinal[2] + dataFinal[3] + "-" + dataFinal[5] + dataFinal[6] + "-" + dataFinal[8] + dataFinal[9] + " " + dataFinal[11] + dataFinal[12] + ":" + dataFinal[14] + dataFinal[15] + ":00"
-            console.log(dataInicialConvertida);
-            console.log(dataFinalConvertida)
-            let user = {
-                medicamento: medicamento,
-                dose: dose,
-                data_inicial: dataInicialConvertida,
-                data_final: dataFinalConvertida,
-                intervalo: intervalo,
-                status: 0,
-                pacienteId: paciente
+        let dataAtual = Date.now()
+        let inicioTimeStamp = Date.parse(dataInicial)
+        let fimTimeStamp = Date.parse(dataFinal)
+        let intervaloStamp = intervalo*60*1000;
+        console.log(`intervalo em milisegundos= ${intervaloStamp}`)
+        let novaData = Date(fimTimeStamp)
+        console.log(`a data final reconvertida é ${novaData}`)
 
-            }
-
-
-
-            fetch(Url + "CadastrarMedicacao", {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(user),
-            }).then(response => {
-
-                if (response.status == 200) { setMensagemDeErro(""); alert("Medicação Cadastrada com Sucesso!!"); navigate("/ConsoleLogado") }
-
-
-            })
-
+       if(fimTimeStamp < dataAtual){setMensagemDeErro("A data final não pode ser menor do que a data atual")}
+       else{
+        if (fimTimeStamp < inicioTimeStamp) {
+            setMensagemDeErro("A data final não pode ser menor que a data inicial")
 
         }
+
+        else {
+            if (inicioTimeStamp < dataAtual) { setMensagemDeErro("A data inicial não pode ser menor do que a data atual") }
+            else {
+                if (medicamento == "" || dose == "" || dataInicial == "" || dataFinal == "" || paciente == "" || intervalo == "") { setMensagemDeErro("Todos os campos devem ser preenchidos!!") }
+                else {
+
+                    while(inicioTimeStamp<=(fimTimeStamp+intervaloStamp)){
+
+                        
+
+                        if(inicioTimeStamp>fimTimeStamp){alert("Medicação Cadastrada com Sucesso!!"); navigate("/ConsoleLogado")}
+                        else{
+                            let novaDataInicial = inicioTimeStamp;
+                        novaDataInicial = Date(novaDataInicial);
+                        inicioTimeStamp = inicioTimeStamp + intervaloStamp;
+                        
+                        console.log(dataInicial)
+
+
+
+                        let dataInicialConvertida = dataInicial[0] + dataInicial[1] + dataInicial[2] + dataInicial[3] + "-" + dataInicial[5] + dataInicial[6] + "-" + dataInicial[8] + dataInicial[9] + " " + dataInicial[11] + dataInicial[12] + ":" + dataInicial[14] + dataInicial[15] + ":00"
+                        let dataFinalConvertida = dataFinal[0] + dataFinal[1] + dataFinal[2] + dataFinal[3] + "-" + dataFinal[5] + dataFinal[6] + "-" + dataFinal[8] + dataFinal[9] + " " + dataFinal[11] + dataFinal[12] + ":" + dataFinal[14] + dataFinal[15] + ":00"
+                         console.log(dataInicialConvertida);
+                        console.log(dataFinalConvertida)
+                        let user = {
+                        medicamento: medicamento,
+                        dose: dose,
+                        data_inicial: dataInicialConvertida,
+                        data_final: dataFinalConvertida,
+                        intervalo: intervalo,
+                        status: 0,
+                        pacienteId: paciente
+
+                    }
+
+
+
+                    fetch(Url + "CadastrarMedicacao", {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(user),
+                    }).then(response => {
+
+                        if (response.status == 200) { setMensagemDeErro("");setDataInicial(novaDataInicial) }
+
+
+                    }).then()
+
+                        }
+                   
+                   
+                }
+
+                }
+
+            }
+        }
+       }
 
 
     }
@@ -141,10 +189,10 @@ const CadastrarMedicacao = () => {
                     <input type="datetime-local" onChange={AtualizaDataInicial.bind()} value={dataInicial} className="input-text" placeholder="Início do tratamento" required ></input>
                     <input type="datetime-local" onChange={AtualizaDataFinal.bind()} value={dataFinal} className="input-text" placeholder="Fim do tratamento" required ></input>
                     <input type="number" min="1" max="24" onChange={AtualizaIntervalo.bind()} value={intervalo} className="input-text" placeholder="Intervalo da medicação" required ></input>
-                    <label htmlFor="ListaDePaciente" className="alinharConsoleLogado2" style={{marginBotton: 0, padding: 0, fontSize: '1.5em'}} >Escolha o Paciente</label>
-                    <div className="alinharConsoleLogado margin-botton" style={{width: '100%'}}>
-                        
-                        <select id="ListaDePacientes" name="cars" size="3" style={{width: '50%'}} onChange={AtualizaPaciente.bind()}>
+                    <label htmlFor="ListaDePaciente" className="alinharConsoleLogado2" style={{ marginBotton: 0, padding: 0, fontSize: '1.5em' }} >Escolha o Paciente</label>
+                    <div className="alinharConsoleLogado margin-botton" style={{ width: '100%' }}>
+
+                        <select id="ListaDePacientes" name="cars" size="3" style={{ width: '50%' }} onChange={AtualizaPaciente.bind()}>
 
 
                             {
@@ -165,16 +213,16 @@ const CadastrarMedicacao = () => {
                     </div>
 
 
-                    <h2>{mensagemDeErro}</h2>
-                    <div className="alinharConsoleLogado2 margin-botton"> <Button  type='submit' value="Cadastrar"  >
+                    <h2 style={{color: 'red', textAlign: 'center'}}>{mensagemDeErro}</h2>
+                    <div className="alinharConsoleLogado2 margin-botton"> <Button type='submit' value="Cadastrar"  >
                         Cadastrar
                     </Button>
                     </div>
 
                     <div className="alinharConsoleLogado2 margin-botton">
-                    <Button  type='button' value="Entrar"  >
-                        <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>
-                    </Button>
+                        <Button type='button' value="Entrar"  >
+                            <Link to="/ConsoleLogado" className="divButton"> Voltar </Link>
+                        </Button>
                     </div>
                 </form>
             </div>

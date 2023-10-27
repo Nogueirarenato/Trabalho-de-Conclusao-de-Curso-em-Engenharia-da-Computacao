@@ -142,8 +142,8 @@ const PaginaDeMedicamentos = () => {
                             <th className="leftHostGroup">Paciente</th>
                             <th className="leftHostGroup">Medicamento</th>
                             <th className="leftHostGroup">Dose</th>
-                            <th className="leftHostGroup">Data de Início</th>
-                            <th className="leftHostGroup">Data Final</th>
+                            <th className="leftHostGroup">Data</th>
+                            <th className="leftHostGroup">Hora</th>
                             <th className="leftHostGroup">Intervalo (h)</th>
                             <th className="leftHostGroup">Status</th>
                             <th className="leftHostGroup">Ações</th>
