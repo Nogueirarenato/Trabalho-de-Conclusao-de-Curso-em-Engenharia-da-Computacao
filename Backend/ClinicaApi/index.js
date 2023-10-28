@@ -315,7 +315,7 @@ app.post("/api/CadastrarPaciente", (req, res) => {
     var telefone = req.body.telefone;
     var responsavel_1 = req.body.responsavel_1;
     var tel_responsavel_1 = req.body.tel_responsavel_1;
-    var tel_responsavel_2 = req.body.tel_responsavel_1;
+    var tel_responsavel_2 = req.body.tel_responsavel_2;
     var responsavel_2 = req.body.responsavel_2;
     console.log(body);
 

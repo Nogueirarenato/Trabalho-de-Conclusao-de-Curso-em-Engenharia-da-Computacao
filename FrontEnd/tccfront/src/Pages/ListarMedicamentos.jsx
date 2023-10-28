@@ -39,6 +39,8 @@ const PaginaDeMedicamentos = () => {
     let [reconhecer, setReconhecer] = useState("");
     let [timerReload, setTimerReload] = useState(60);
 
+    
+
 
     useEffect(() => {
         // GET request using fetch inside useEffect React hook
@@ -144,7 +146,7 @@ const PaginaDeMedicamentos = () => {
                             <th className="leftHostGroup">Dose</th>
                             <th className="leftHostGroup">Data</th>
                             <th className="leftHostGroup">Hora</th>
-                            <th className="leftHostGroup">Intervalo (h)</th>
+                            {/* <th className="leftHostGroup">Intervalo (h)</th> */}
                             <th className="leftHostGroup">Status</th>
                             <th className="leftHostGroup">Ações</th>
 
@@ -160,9 +162,16 @@ const PaginaDeMedicamentos = () => {
                                 convertString = convertString.toString()
                                 vetorName.push(convertString)
                                 indice++
+                                let dataTimeStamp = Date.parse(element.data_inicial)
+                                let dataAtual = Date.now()
+                                console.log(`dataTimeStapm ${dataTimeStamp}
+                                            dataAtual ${dataAtual}
+                                            `)
+                                
                                 if (element.status == 0) { StatusElemento = "Aguardando"; classe = 'orange' }
                                 if (element.status == 1) { StatusElemento = "Atrasado"; classe = 'red' }
                                 if (element.status == 2) { StatusElemento = "OK"; classe = 'green' }
+                                if(dataTimeStamp < dataAtual && element.status != 2){ StatusElemento = "Atrasado"; classe = 'red' }
 
                                 resposta2.map(elemento => {
                                     vetor2.push(elemento.nome)
@@ -189,9 +198,9 @@ const PaginaDeMedicamentos = () => {
                                         </td>
                                         <td className="leftHostGroup">{element.medicamento}</td>
                                         <td className="leftHostGroup">{element.dose}</td>
-                                        <td className="leftHostGroup">{element.data_inicial[8] + element.data_inicial[9] + "/" + element.data_inicial[5] + element.data_inicial[6] + "/" + element.data_inicial[0] + element.data_inicial[1] + element.data_inicial[2] + element.data_inicial[3] + "      " + element.data_inicial[11] + element.data_inicial[12] + ":" + element.data_inicial[14] + element.data_inicial[15]}</td>
-                                        <td className="leftHostGroup">{element.data_final[8] + element.data_final[9] + "/" + element.data_final[5] + element.data_final[6] + "/" + element.data_final[0] + element.data_final[1] + element.data_final[2] + element.data_final[3] + "      " + element.data_final[11] + element.data_final[12] + ":" + element.data_final[14] + element.data_final[15]}</td>
-                                        <td className="leftHostGroup">{element.intervalo}</td>
+                                        <td className="leftHostGroup">{element.data_inicial[8] + element.data_inicial[9] + "/" + element.data_inicial[5] + element.data_inicial[6] + "/" + element.data_inicial[0] + element.data_inicial[1] + element.data_inicial[2] + element.data_inicial[3]} </td>
+                                        <td className="leftHostGroup">{element.data_inicial[11] + element.data_inicial[12] + ":" + element.data_inicial[14] + element.data_inicial[15]}</td>
+                                        {/* <td className="leftHostGroup">{element.intervalo}</td> */}
                                         <td className="leftHostGroup" style={{ backgroundColor: classe, fontWeight: '500', color: "white" }}>{StatusElemento}</td>
                                         <td className="leftHostGroup" style={{ color: classe }}>
                                             <form >
