@@ -188,6 +188,23 @@ app.delete("/api/ApagarAdministrador", (req, res) => {
 
 //Medicamentos
 
+app.post("/api/ListarMedicamentosUm", (req, res) => {
+
+    let Id = req.body.id
+    let idInt = parseInt(Id)
+
+    Medicamentos.findAll({ where: { pacienteId: idInt }}).then(medicacoes => {
+
+        res.json(medicacoes)
+    }).then(console.log("Listando medicacoes")).catch(() => {
+        console.log("Erro 03")
+        res.sendStatus(400)
+    })
+
+})
+
+
+
 app.get("/api/ListarMedicamentos", (req, res) => {
     Medicamentos.findAll().then(medicacoes => {
 
@@ -198,6 +215,9 @@ app.get("/api/ListarMedicamentos", (req, res) => {
     })
 
 })
+
+
+
 app.post("/api/CadastrarMedicacao", (req, res) => {
 
 

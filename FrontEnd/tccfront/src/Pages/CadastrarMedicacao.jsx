@@ -210,7 +210,7 @@ const CadastrarMedicacao = () => {
                                 )
                                 .then(() => {
                                         if (inicioTimeStamp < fimTimeStamp) { LoopCadastrar() }
-                                        else { alert("Medicação cadastrada com sucesso"); } //navigate("/ConsoleLogado")
+                                        else { alert("Medicação cadastrada com sucesso"); navigate("/ConsoleLogado")} //
                                     })
 
 

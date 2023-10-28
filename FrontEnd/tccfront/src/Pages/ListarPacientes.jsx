@@ -22,7 +22,7 @@ const PaginaDePacientes = () => {
 
     let [resposta, setResposta] = useState([]);
 
-
+    const navigate = useNavigate();
     useEffect(() => {
         // GET request using fetch inside useEffect React hook
         fetch(Url + "ListarPacientes")
@@ -32,35 +32,44 @@ const PaginaDePacientes = () => {
         // empty dependency array means this effect will only run once (like componentDidMount in classes)
     }, []);
 
-function Apagar(event){
-    event.preventDefault();
-    let confircacao = confirm("Tem certeza que deseja apagar o Paciente?")
+    function IrPaciente(event) {
+        event.preventDefault();
+        localStorage.setItem("UsuarioID", event.target.value);
+        navigate("/listaDeMedicamentosUm")
+
+    }
+
+    function Apagar(event) {
+        event.preventDefault();
+        let confircacao = confirm("Tem certeza que deseja apagar o Paciente?")
 
 
-    if (confircacao == true) {
+        if (confircacao == true) {
 
 
-        let paciente = {
+            let paciente = {
 
-            id: event.target.value
+                id: event.target.value
 
+            }
+
+
+
+            setTimeout(() => {
+                fetch(Url + "ApagarPaciente", {
+                    method: 'DELETE',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(paciente),
+                }).then(window.location.reload(true))
+            }, 1000)
         }
 
 
 
-        setTimeout(() => {
-            fetch(Url + "ApagarPaciente", {
-                method: 'DELETE',
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(paciente),
-            }).then(window.location.reload(true))
-        }, 1000)
+
     }
-
-
-}
 
     return (
 
@@ -97,20 +106,20 @@ function Apagar(event){
                                 vetorName.push(convertString)
                                 indice++
                                 return (
-                                    <tr className="linhaHostGroup"key={element.id}>
+                                    <tr className="linhaHostGroup" key={element.id}>
                                         <td className="centerNum" >{element.id}</td>
                                         <td className="leftHostGroup">{element.nome}</td>
                                         <td className="leftHostGroup">{element.idade}</td>
-                                        <td className="leftHostGroup"><div ><Button style={{minWidth: '5vw'}}className="btn-block btn-blocktime" type='button' value={element.id}><Link to={"/ListarMedicacoes/"+element.id} className="divButton"> Visualizar </Link></Button></div></td>
+                                        <td className="leftHostGroup"><div ><Button style={{ minWidth: '5vw' }} className="btn-block btn-blocktime" type='button' value={element.id} onClick={IrPaciente.bind(value)}>Visualizar</Button></div></td>
                                         <td className="leftHostGroup">{element.telefone}</td>
                                         <td className="leftHostGroup">{element.responsavel_1}</td>
                                         <td className="leftHostGroup">{element.tel_responsavel_1}</td>
                                         <td className="leftHostGroup">{element.responsavel_2}</td>
                                         <td className="leftHostGroup">{element.tel_responsavel_2}</td>
                                         <td className="leftHostGroup"> <Button className="btn-block btn-blocktime" style={{ marginLeft: "5%" }} value={element.id} onClick={Apagar.bind(value)}  >
-                                                        Apagar
-                                                    </Button></td>
-                                       
+                                            Apagar
+                                        </Button></td>
+
 
 
                                         {/* <td className="centerNum"><a onClick={this.janelaModal.bind(this, vetor[indice], vetorName[indice])} >Listar Eventos</a></td> */}

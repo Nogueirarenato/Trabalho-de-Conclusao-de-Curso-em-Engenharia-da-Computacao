@@ -9,6 +9,7 @@ import ListarMedicamentos from './Pages/ListarMedicamentos';
 import CadastrarAdministrador from './Pages/CadastrarAdministrador';
 import CadastrarPaciente from './Pages/CadastrarPaciente';
 import CadastrarMedicacao from './Pages/CadastrarMedicacao';
+import ListarMedicamentosUm from './Pages/ListarMedicamentosUm'
 
 
 
@@ -29,6 +30,7 @@ function App() {
           <Route path='ConsoleLogado' element={<ConsoleLogado />} />
           <Route path='listaDePacientes' element={<ListarPacientes />} />
           <Route path='listaDeMedicamentos' element={<ListarMedicamentos />} />
+          <Route path='listaDeMedicamentosUm' element={<ListarMedicamentosUm />} />
           <Route path='cadastrarAdministrador' element={<CadastrarAdministrador />} />
           <Route path='cadastrarPaciente' element={<CadastrarPaciente />} />
           <Route path='cadastrarMedicacao' element={<CadastrarMedicacao />} />

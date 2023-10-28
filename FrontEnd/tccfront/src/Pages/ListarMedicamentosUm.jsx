@@ -10,7 +10,7 @@ import { Button } from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
 
 
-const PaginaDeMedicamentos = () => {
+const PaginaDeMedicamentosUm = () => {
 
     let vetor = []
     let indice = -1
@@ -58,8 +58,17 @@ const PaginaDeMedicamentos = () => {
 
 
     useEffect(() => {
-        // GET request using fetch inside useEffect React hook
-        fetch(Url + "ListarMedicamentos")
+        let user = {
+            id: localStorage.getItem("UsuarioID")
+        }
+     
+        fetch(Url + "ListarMedicamentosUm", {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+        })
             .then(response => response.json())
             .then(data => { setResposta(data) });
 
@@ -147,7 +156,7 @@ const PaginaDeMedicamentos = () => {
 
         <div className="caixaAdministradores">
            
-            <h1 className="tituloLogado alinharConsoleLogado">Lista de Medicamentos</h1>
+            <h1 className="tituloLogado alinharConsoleLogado">Lista de Medicamentos Um</h1>
             
 
             <div style={{color: 'red', marginLeft: '5vw', display: 'flex'}}> <div>Atualiza em: {60 - tempo}s</div> <div style={{marginBottom: '1vh',marginLeft: '50vw', minWidth: "10vw"}}><Button className="btn-block btn-blocktime" style={{ marginLeft: "5%" }}  onClick={Atualizar.bind(value)}  >
@@ -260,4 +269,4 @@ const PaginaDeMedicamentos = () => {
     );
 }
 
-export default PaginaDeMedicamentos;
+export default PaginaDeMedicamentosUm;
