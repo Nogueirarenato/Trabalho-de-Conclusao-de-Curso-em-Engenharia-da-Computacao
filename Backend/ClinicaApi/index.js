@@ -188,6 +188,13 @@ app.delete("/api/ApagarAdministrador", (req, res) => {
 
 //Medicamentos
 
+
+
+
+
+
+
+
 app.post("/api/ListarMedicamentosUm", (req, res) => {
 
     let Id = req.body.id
@@ -288,6 +295,39 @@ app.patch("/api/CadastrarMedicacao", (req, res) => {
             res.status(500).json({ message: "Erro interno do servidor" });
         });
 });
+
+
+
+app.patch("/api/Dispositivo", (req, res) => {
+    var id = req.body.id;
+    var idInt = parseInt(id);
+    var status = 2;
+
+    Medicamentos.findByPk(idInt)
+        .then((medicamento) => {
+            if (medicamento) {
+                return medicamento.update({ status: status });
+            } else {
+                res.status(404).json({ message: "Medicamento não encontrado" });
+            }
+        })
+        .then(() => {
+            console.log("Medicação atualizada com sucesso");
+            res.status(200).json({ message: "Medicação atualizada com sucesso" });
+        })
+        .catch((error) => {
+            console.error("Erro ao atualizar medicação:", error);
+            res.status(500).json({ message: "Erro interno do servidor" });
+        });
+});
+
+
+
+
+
+
+
+
 
 app.delete("/api/ApagarMedicacao", (req, res) => {
     var id = req.body.id;
